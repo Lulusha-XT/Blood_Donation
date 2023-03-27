@@ -20,7 +20,7 @@ app.use(express.json);
 // Error handler
 app.use(errorHandler);
 
-app.get("/", function (req: Request, res: Response) {
+app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
@@ -32,7 +32,9 @@ app.use("uploads", express.static(path.resolve("uploads")));
   try {
     await connectDB();
     app.listen(app.get("port"));
-    console.log(`Server is running on port ${app.get("port")}`);
+    console.log(
+      `Server is running on port http://localhost:${app.get("port")}`
+    );
   } catch (error) {
     console.log(error);
   }
