@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const connectDB = async () => {
   try {
     mongoose.set("strictQuery", true);
-    mongoose.connect(MONGO_DB_CONFIG.DB);
+    await mongoose.connect(MONGO_DB_CONFIG.DB);
     console.log("Database is connected");
   } catch (error) {
     console.log(error);
