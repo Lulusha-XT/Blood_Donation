@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/features/authentication/pages/splash_screen/splash_screen.dart';
+import 'package:flutter_application_1/src/features/pages/signup_page/signup_screen.dart';
+import 'package:flutter_application_1/src/features/pages/splash_page/splash_screen.dart';
+import 'package:flutter_application_1/src/features/pages/welcome/welcome_screen.dart';
 import 'package:flutter_application_1/src/utils/themes/theme.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,11 +22,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: CAppTheme.lightTheme,
+      theme: CAppTheme.ligthTheme,
       darkTheme: CAppTheme.darkTheme,
       themeMode: ThemeMode.system,
       title: 'Flutter Demo',
-      home: SplashScreen(),
+      home: const WellComePage(),
     );
   }
 }
