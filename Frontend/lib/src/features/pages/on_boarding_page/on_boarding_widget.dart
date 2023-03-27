@@ -31,11 +31,13 @@ class OnBoardingPageWidget extends StatelessWidget {
               Text(model.subTitle),
             ],
           ),
-          Text(model.counterText,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(color: cPrimaryColor)),
+          Text(
+            model.counterText,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge!
+                .copyWith(color: cPrimaryColor),
+          ),
           const SizedBox(height: 50.0)
         ],
       ),

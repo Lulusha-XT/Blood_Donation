@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/constants/image_strings.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
 import 'package:flutter_application_1/src/features/pages/signup_page/signup_screen.dart';
 import 'package:get/get.dart';
-import 'package:flutter_application_1/src/constants/image_string.dart';
 
 class SignInFooterWidget extends StatelessWidget {
   const SignInFooterWidget({

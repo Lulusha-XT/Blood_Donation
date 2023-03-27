@@ -3,7 +3,7 @@ import 'package:flutter_application_1/src/common_widgets/fade_in_animation/anima
 import 'package:flutter_application_1/src/common_widgets/fade_in_animation/fade_in_animation_controller.dart';
 import 'package:flutter_application_1/src/common_widgets/fade_in_animation/fade_in_animation_model.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
-import 'package:flutter_application_1/src/constants/image_string.dart';
+import 'package:flutter_application_1/src/constants/image_strings.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
 import 'package:flutter_application_1/src/features/pages/signin_page/signin_screen.dart';

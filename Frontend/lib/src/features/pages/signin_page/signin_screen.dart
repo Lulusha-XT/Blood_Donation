@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/common_widgets/form/form_header_widget.dart';
-import 'package:flutter_application_1/src/constants/image_string.dart';
+import 'package:flutter_application_1/src/constants/image_strings.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
 import 'package:flutter_application_1/src/features/pages/signin_page/widgets/signin_footer_widget.dart';

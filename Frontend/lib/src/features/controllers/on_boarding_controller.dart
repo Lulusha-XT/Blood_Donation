@@ -3,6 +3,7 @@ import 'package:flutter_application_1/src/constants/image_strings.dart';
 import 'package:flutter_application_1/src/constants/text_strings.dart';
 import 'package:flutter_application_1/src/features/models/model_on_boarding.dart';
 import 'package:flutter_application_1/src/features/pages/on_boarding_page/on_boarding_widget.dart';
+import 'package:flutter_application_1/src/features/pages/welcome/welcome_screen.dart';
 import 'package:get/get.dart';
 import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
 
@@ -54,5 +55,8 @@ class OnBoardingController extends GetxController {
   animateToNextSlide() {
     int nextPage = controller.currentPage + 1;
     controller.animateToPage(page: nextPage);
+    if (nextPage == 3) {
+      Get.to(() => const WellComePage());
+    }
   }
 }
