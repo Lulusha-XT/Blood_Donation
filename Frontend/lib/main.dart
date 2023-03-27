@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       darkTheme: CAppTheme.darkTheme,
       themeMode: ThemeMode.system,
       title: 'Flutter Demo',
-      home: const WellComePage(),
+      home: SplashPage(),
     );
   }
 }
