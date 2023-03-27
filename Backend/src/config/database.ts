@@ -1,35 +1,9 @@
-import dotenv from "dotenv";
-import { Pool } from "pg";
+const MONGO_DB_CONFIG = {
+  DB: "mongodb+srv://leulsileshi7:21191921@blood-donation.v2utun4.mongodb.net/?retryWrites=true&w=majority",
+  PAGE_SIZE: 10,
+  // BCRYPT_PASSWORD: "Grocery App",
+  // SALT_ROUND: 10,
+  // TOKEN_SECRET: 2119,
+};
 
-dotenv.config();
-
-const {
-  POSTGRES_HOST,
-  POSTGRES_DB,
-  POSTGRES_DB_TEST,
-  POSTGRES_USER,
-  POSTGRES_PASSWORD,
-  ENV,
-} = process.env;
-
-let DB: any;
-
-if (ENV === "dev") {
-  DB = new Pool({
-    host: POSTGRES_HOST,
-    database: POSTGRES_DB,
-    user: POSTGRES_USER,
-    password: POSTGRES_PASSWORD,
-  });
-}
-
-if (ENV === "test") {
-  DB = new Pool({
-    host: POSTGRES_HOST,
-    database: POSTGRES_DB_TEST,
-    user: POSTGRES_USER,
-    password: POSTGRES_PASSWORD,
-  });
-}
-
-export default DB;
+export default MONGO_DB_CONFIG;
