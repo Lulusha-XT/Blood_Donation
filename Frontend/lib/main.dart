@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/features/pages/signup_page/signup_screen.dart';
 import 'package:flutter_application_1/src/features/pages/splash_page/splash_screen.dart';
-import 'package:flutter_application_1/src/features/pages/welcome/welcome_screen.dart';
 import 'package:flutter_application_1/src/utils/themes/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
