@@ -3,6 +3,7 @@ import connectDB from "./config/db.connect";
 import morgan from "morgan";
 import errorHandler from "./middlewares/errors";
 import path from "path";
+import indexRoutes from "./routes/index";
 
 const app: express.Application = express();
 const address: string = "8080";
@@ -12,16 +13,16 @@ app.set("port", process.env.PORT || address);
 
 // Middlewares
 app.use(morgan("dev"));
-app.use(express.json);
+app.use(express.json());
 
 // Routes
-// app.use("/api");
+app.use("/api", indexRoutes);
 
 // Error handler
 app.use(errorHandler);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.send("API WORKING !!");
 });
 
 // Public
