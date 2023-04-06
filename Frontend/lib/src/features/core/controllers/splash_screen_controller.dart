@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:Frontend/lib/src/features/authentication/controllers/splash_screen_controller.dart
-import 'package:flutter_application_1/src/features/authentication/pages/on_boarding_page/on_boarding_screen.dart';
-========
 import 'package:flutter_application_1/src/features/core/pages/on_boarding_page/on_boarding_screen.dart';
->>>>>>>> leul:Frontend/lib/src/features/core/controllers/splash_screen_controller.dart
 import 'package:get/get.dart';
 
 class SplashScreenController extends GetxController {

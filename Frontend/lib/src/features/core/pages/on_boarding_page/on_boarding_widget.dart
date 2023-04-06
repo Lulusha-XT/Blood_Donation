@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
-<<<<<<<< HEAD:Frontend/lib/src/features/authentication/pages/on_boarding_page/on_boarding_widget.dart
-import 'package:flutter_application_1/src/features/authentication/models/model_on_boarding.dart';
-========
 import 'package:flutter_application_1/src/features/core/models/model_on_boarding.dart';
->>>>>>>> leul:Frontend/lib/src/features/core/pages/on_boarding_page/on_boarding_widget.dart
 
 class OnBoardingPageWidget extends StatelessWidget {
   const OnBoardingPageWidget({

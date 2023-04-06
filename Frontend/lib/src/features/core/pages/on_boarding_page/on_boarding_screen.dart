@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
-<<<<<<<< HEAD:Frontend/lib/src/features/authentication/pages/on_boarding_page/on_boarding_screen.dart
-import 'package:flutter_application_1/src/features/authentication/controllers/on_boarding_controller.dart';
-========
 import 'package:flutter_application_1/src/features/core/controllers/on_boarding_controller.dart';
->>>>>>>> leul:Frontend/lib/src/features/core/pages/on_boarding_page/on_boarding_screen.dart
 import 'package:get/get.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
