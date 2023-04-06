@@ -21,3 +21,7 @@ const String cGoogleLogoImage = "assets/logo/google-logo.png";
 // --Forget PAssword
 const String cForgetPasswordImage =
     "assets/images/forget_password/forgete-password.png";
+
+// Dashboard page
+
+const String cUserProfileImage = "assets/images/dashboard/user.png";

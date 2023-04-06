@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/utils/themes/widget_theme/appbar_theme.dart';
 import 'package:flutter_application_1/src/utils/themes/widget_theme/elevated_button_theme.dart';
 import 'package:flutter_application_1/src/utils/themes/widget_theme/outlined_button_theme.dart';
 import 'package:flutter_application_1/src/utils/themes/widget_theme/text_field_theme.dart';
@@ -12,6 +13,7 @@ class CAppTheme {
     outlinedButtonTheme: COutlinedButtonTheme.ligthOutlinedButtonTheme,
     elevatedButtonTheme: CElevatedButtonTheme.ligthElevatedButtonTheme,
     inputDecorationTheme: CTextFormFieldTheme.ligthInputDecorationTheme,
+    appBarTheme: CAppBarTheme.lightAppBarTheme,
   );
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
@@ -19,5 +21,6 @@ class CAppTheme {
     outlinedButtonTheme: COutlinedButtonTheme.darkOutlinedButtonTheme,
     elevatedButtonTheme: CElevatedButtonTheme.darkElevatedButtonTheme,
     inputDecorationTheme: CTextFormFieldTheme.darkInputDecorationTheme,
+    appBarTheme: CAppBarTheme.darkAppBarTheme,
   );
 }
