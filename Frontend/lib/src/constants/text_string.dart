@@ -39,6 +39,7 @@ const String cSignUpSubTitle =
     "Create your profile to start your Journey with us...";
 const String cAlreadyHaveAnAccount = "Already have an Account? ";
 const String cFullName = "Full Name";
+const String cBloodType = "Blood Type";
 const String cPhoneNumber = "Phone Number";
 
 // --Forget Password Text

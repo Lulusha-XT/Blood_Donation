@@ -12,7 +12,7 @@ const createUser = async (req: Request, res: Response, next: Function) => {
       phoneNo: req.body.phoneNo,
       bloodType: req.body.bloodType,
     };
-
+    console.log(user);
     const newUser = await userServices.createUser(user);
     return res.json({ message: "Success", data: newUser });
   } catch (error) {
