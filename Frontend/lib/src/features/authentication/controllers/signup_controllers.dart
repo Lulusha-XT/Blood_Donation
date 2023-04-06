@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/api/api_services.dart';
-import 'package:flutter_application_1/src/features/models/user_model.dart';
+import 'package:flutter_application_1/src/features/core/models/user_model.dart';
 import 'package:get/get.dart';
 
 class SignUpControllers extends GetxController {

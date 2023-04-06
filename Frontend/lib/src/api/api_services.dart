@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_application_1/src/config/config.dart';
-import 'package:flutter_application_1/src/features/models/login_response_model.dart';
+import 'package:flutter_application_1/src/features/authentication/models/login_response_model.dart';
 import 'package:flutter_application_1/src/utils/shared_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;

@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/src/features/pages/on_boarding_page/on_boarding_screen.dart';
+import 'package:flutter_application_1/src/features/core/pages/on_boarding_page/on_boarding_screen.dart';
 import 'package:get/get.dart';
 
 class SplashScreenController extends GetxController {

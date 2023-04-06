@@ -1,63 +1,104 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/common_widgets/circularProgressBar/circular_progress_widget.dart';
 import 'package:flutter_application_1/src/config/config.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
-import 'package:flutter_application_1/src/features/controllers/signin_controllers.dart';
-import 'package:flutter_application_1/src/features/pages/home_page/home_page.dart';
+import 'package:flutter_application_1/src/features/authentication/controllers/signup_controllers.dart';
+import 'package:flutter_application_1/src/features/core/models/user_model.dart';
+import 'package:flutter_application_1/src/features/core/pages/home_page/home_page.dart';
 import 'package:get/get.dart';
 
-class SignInForm extends StatelessWidget {
-  const SignInForm({
+class SignUpFormWidget extends StatelessWidget {
+  const SignUpFormWidget({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final controllers = Get.put(SignInControllers());
+    final controllers = Get.put(SignUpControllers());
     final formKey = GlobalKey<FormState>();
+
     return Form(
       key: formKey,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: cFormHeigth - 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextFormField(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+              controller: controllers.fullname,
+              decoration: const InputDecoration(
+                label: Text(cFullName),
+                prefixIcon: Icon(Icons.person_outline_rounded),
+              ),
+              validator: (value) => validate(value, cFullName)),
+          const SizedBox(height: cFormHeigth - 20),
+          // set the default value to 'A'
+
+// build the DropdownButtonFormField widget
+          DropdownButtonFormField<String>(
+            value: controllers.defaultValue, // set the default value here
+            decoration: const InputDecoration(
+              label: Text(cBloodType),
+              prefixIcon: Icon(Icons.person_outline_rounded),
+            ),
+            items: <String>['A', 'B', 'AB', 'O']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (String? value) {
+              controllers.bloodType.text = value!;
+            },
+            validator: (value) => validate(value, cBloodType),
+          ),
+          const SizedBox(height: cFormHeigth - 20),
+          TextFormField(
               controller: controllers.email,
               decoration: const InputDecoration(
+                label: Text(cEmail),
                 prefixIcon: Icon(Icons.email_outlined),
-                labelText: cEmail,
-                hintText: cEmail,
-                border: OutlineInputBorder(),
               ),
+              validator: validateEmail),
+          const SizedBox(height: cFormHeigth - 20),
+          TextFormField(
+            controller: controllers.phoneNo,
+            decoration: const InputDecoration(
+              label: Text(cPhoneNumber),
+              prefixIcon: Icon(Icons.phone_outlined),
             ),
-            const SizedBox(height: cFormHeigth),
-            TextFormField(
-              controller: controllers.password,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.key_outlined),
-                labelText: cPassword,
-                hintText: cPassword,
-                border: const OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.remove_red_eye_sharp),
+            validator: (value) => validate(value, cPhoneNumber),
+          ),
+          const SizedBox(height: cFormHeigth - 20),
+          Obx(() => TextFormField(
+                controller: controllers.password,
+                decoration: InputDecoration(
+                  label: const Text(cPassword),
+                  prefixIcon: const Icon(Icons.key_outlined),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      controllers.hidePassword.value =
+                          !controllers.hidePassword.value;
+                    },
+                    color: Colors.redAccent.withOpacity(.4),
+                    icon: Icon(
+                      controllers.hidePassword.value
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            const SizedBox(height: cFormHeigth),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {
-                  //  ForgetPasswordScreen.buildShowModalBottomSheet(context);
-                },
-                child: const Text(cForgetPassword),
-              ),
-            ),
-            Obx(() => controllers.isAsyncCallProcess.value
+                validator: (value) => validate(value, cPassword),
+                obscureText: controllers.hidePassword.value,
+              )),
+
+          const SizedBox(height: cFormHeigth - 10),
+
+          Obx(
+            () => controllers.isAsyncCallProcess.value
                 ? const Center(
                     child: DottedCircularProgressIndicatorFb(
                       currentDotColor: cSecondaryColor,
@@ -70,11 +111,20 @@ class SignInForm extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
+                          // Show circular progress indicator while creating user
                           controllers.isAsyncCallProcess.value = true;
+                          final user = UserModel(
+                            email: controllers.email.text.trim(),
+                            password: controllers.password.text.trim(),
+                            fullName: controllers.fullname.text.trim(),
+                            phoneNo: controllers.phoneNo.text.trim(),
+                            bloodType: controllers.bloodType.text.trim(),
+                          );
+
+                          // SignUpControllers.instance
+                          //     .registerUser(user.email, user.password);
                           try {
-                            await SignInControllers.instance.signInUser(
-                                    controllers.email.text.trim(),
-                                    controllers.password.text.trim())
+                            await SignUpControllers.instance.createUser(user)
                                 ?
 
                                 // If the registration was successful
@@ -85,7 +135,7 @@ class SignInForm extends StatelessWidget {
                                       return AlertDialog(
                                         title: const Text(Config.appName),
                                         content: const Text(
-                                            "User Logged-In Successfuly"),
+                                            "Registration completed successfully"),
                                         actions: <Widget>[
                                           TextButton(
                                             child: const Text("Ok"),
@@ -111,8 +161,7 @@ class SignInForm extends StatelessWidget {
                                       return AlertDialog(
                                         title: const Text(Config.appName),
                                         content: const Text(
-                                          "Invalid Email or Password",
-                                        ),
+                                            "This email is already registered"),
                                         actions: <Widget>[
                                           TextButton(
                                             child: const Text("Ok"),
@@ -145,14 +194,32 @@ class SignInForm extends StatelessWidget {
                               },
                             );
                           }
+
+                          //   Get.to(() => const OTPScrenn());
                         }
                       },
-                      child: const Text(cSignin),
+                      child: Text(cSignup.toUpperCase()),
                     ),
-                  )),
-          ],
-        ),
+                  ),
+          ),
+        ],
       ),
     );
+  }
+
+  String? validate(String? value, String inputName) {
+    if (value!.isEmpty) {
+      return "$inputName is required";
+    }
+    return null;
+  }
+
+  String? validateEmail(String? email) {
+    if (email == null || email.isEmpty) {
+      return 'Email is required';
+    } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
+      return 'Please enter a valid email';
+    }
+    return null;
   }
 }

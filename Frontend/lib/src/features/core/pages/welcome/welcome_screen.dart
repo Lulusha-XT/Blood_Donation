@@ -6,8 +6,8 @@ import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/image_strings.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
-import 'package:flutter_application_1/src/features/pages/signin_page/signin_screen.dart';
-import 'package:flutter_application_1/src/features/pages/signup_page/signup_screen.dart';
+import 'package:flutter_application_1/src/features/authentication/pages/signin_page/signin_screen.dart';
+import 'package:flutter_application_1/src/features/authentication/pages/signup_page/signup_screen.dart';
 import 'package:get/get.dart';
 
 class WellComePage extends StatelessWidget {

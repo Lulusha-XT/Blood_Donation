@@ -3,7 +3,7 @@ import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/image_strings.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_strings.dart';
-import 'package:flutter_application_1/src/features/controllers/splash_screen_controller.dart';
+import 'package:flutter_application_1/src/features/core/controllers/splash_screen_controller.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 

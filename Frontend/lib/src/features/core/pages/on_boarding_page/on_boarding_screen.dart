@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
-import 'package:flutter_application_1/src/features/controllers/on_boarding_controller.dart';
+import 'package:flutter_application_1/src/features/core/controllers/on_boarding_controller.dart';
 import 'package:get/get.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
