@@ -30,19 +30,6 @@ class SignUpPage extends StatelessWidget {
                 const SizedBox(height: cDefaultSize - 10),
                 Column(
                   children: [
-                    const Text("OR"),
-                    const SizedBox(height: cDefaultSize - 10),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        onPressed: () {},
-                        icon: const Image(
-                          width: 20.0,
-                          image: AssetImage(cGoogleLogoImage),
-                        ),
-                        label: const Text(cSignInWithGoogle),
-                      ),
-                    ),
                     TextButton(
                       onPressed: () {
                         Get.to(() => const SigninPage());

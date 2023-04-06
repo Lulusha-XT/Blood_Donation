@@ -4,12 +4,14 @@ class UserModel {
   final String email;
   final String phoneNo;
   final String password;
+  final String bloodType;
   final String? profilePicture;
 
   const UserModel({
     this.id,
     required this.email,
     required this.password,
+    required this.bloodType,
     required this.fullName,
     required this.phoneNo,
     this.profilePicture,
@@ -34,6 +36,7 @@ class UserModel {
       "Email": email,
       "Phone": phoneNo,
       "Password": password,
+      "bloodType": bloodType,
       "ProfilePicture": profilePicture,
     };
   }

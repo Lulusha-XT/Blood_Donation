@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/api/api_services.dart';
 import 'package:get/get.dart';
 
 class SignInControllers extends GetxController {
@@ -6,8 +7,13 @@ class SignInControllers extends GetxController {
 
   final email = TextEditingController();
   final password = TextEditingController();
+  RxBool isAsyncCallProcess = false.obs;
 
-  void signInUser(String email, String password) {
+  Future<bool> signInUser(String email, String password) async {
     // AuthenticationRepository.instance.signInUserWithEmailAndPassword(email, password);
+
+    bool result = await ApiService.loginUser(email, password);
+    isAsyncCallProcess.value = false;
+    return result;
   }
 }

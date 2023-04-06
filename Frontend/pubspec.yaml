@@ -40,6 +40,9 @@ dependencies:
   liquid_swipe: ^3.0.0
   smooth_page_indicator: ^1.0.1
   flutter_riverpod: ^2.3.2
+  http: ^0.13.5
+  shared_preferences: ^2.1.0
+  api_cache_manager: ^1.0.2
 
 dev_dependencies:
   flutter_test:

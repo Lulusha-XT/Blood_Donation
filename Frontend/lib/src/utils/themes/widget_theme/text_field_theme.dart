@@ -3,23 +3,21 @@ import 'package:flutter_application_1/src/constants/colors.dart';
 
 class CTextFormFieldTheme {
   CTextFormFieldTheme._();
-  static InputDecorationTheme ligthInputDecorationTheme =
-      const InputDecorationTheme(
-    border: OutlineInputBorder(),
+  static InputDecorationTheme ligthInputDecorationTheme = InputDecorationTheme(
+    border: const OutlineInputBorder(),
     prefixIconColor: cSecondaryColor,
-    floatingLabelStyle: TextStyle(color: cSecondaryColor),
+    floatingLabelStyle: const TextStyle(color: cSecondaryColor),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(width: 2.0, color: cSecondaryColor),
-    ),
+        borderSide: const BorderSide(width: 2.0, color: cPrimaryColor),
+        borderRadius: BorderRadius.circular(15)),
   );
 
-  static InputDecorationTheme darkInputDecorationTheme =
-      const InputDecorationTheme(
-    border: OutlineInputBorder(),
+  static InputDecorationTheme darkInputDecorationTheme = InputDecorationTheme(
+    border: const OutlineInputBorder(),
     prefixIconColor: cPrimaryColor,
-    floatingLabelStyle: TextStyle(color: cPrimaryColor),
+    floatingLabelStyle: const TextStyle(color: cPrimaryColor),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(width: 2.0, color: cPrimaryColor),
-    ),
+        borderSide: const BorderSide(width: 2.0, color: cPrimaryColor),
+        borderRadius: BorderRadius.circular(15)),
   );
 }
