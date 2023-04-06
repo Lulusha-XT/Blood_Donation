@@ -1,6 +1,6 @@
 /* -- App Text String -- */
 
-const String cAppName = "Brew Crew";
+const String cAppName = "Blood Donation";
 const String cAppTagLine = "Learn to code";
 
 /* --On Boarding Text */
