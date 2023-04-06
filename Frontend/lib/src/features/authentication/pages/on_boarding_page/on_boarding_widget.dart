@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
-import 'package:flutter_application_1/src/features/models/model_on_boarding.dart';
+import 'package:flutter_application_1/src/features/authentication/models/model_on_boarding.dart';
 
 class OnBoardingPageWidget extends StatelessWidget {
   const OnBoardingPageWidget({

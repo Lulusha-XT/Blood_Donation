@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
-import 'package:flutter_application_1/src/features/controllers/signin_controllers.dart';
+import 'package:flutter_application_1/src/features/authentication/controllers/signin_controllers.dart';
 import 'package:get/get.dart';
 
 class SignInForm extends StatelessWidget {

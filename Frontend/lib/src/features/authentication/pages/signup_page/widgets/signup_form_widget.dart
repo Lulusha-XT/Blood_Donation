@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
-import 'package:flutter_application_1/src/features/controllers/signup_controllers.dart';
-import 'package:flutter_application_1/src/features/models/user_model.dart';
+import 'package:flutter_application_1/src/features/authentication/controllers/signup_controllers.dart';
+import 'package:flutter_application_1/src/features/authentication/models/user_model.dart';
 import 'package:get/get.dart';
 
 class SignUpFormWidget extends StatelessWidget {

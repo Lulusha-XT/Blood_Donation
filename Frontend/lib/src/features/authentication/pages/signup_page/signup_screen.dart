@@ -3,8 +3,8 @@ import 'package:flutter_application_1/src/common_widgets/form/form_header_widget
 import 'package:flutter_application_1/src/constants/image_strings.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
-import 'package:flutter_application_1/src/features/pages/signin_page/signin_screen.dart';
-import 'package:flutter_application_1/src/features/pages/signup_page/widgets/signup_form_widget.dart';
+import 'package:flutter_application_1/src/features/authentication/pages/signin_page/signin_screen.dart';
+import 'package:flutter_application_1/src/features/authentication/pages/signup_page/widgets/signup_form_widget.dart';
 import 'package:get/get.dart';
 
 class SignUpPage extends StatelessWidget {
