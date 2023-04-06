@@ -6,14 +6,9 @@ import 'package:flutter_application_1/src/config/config.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
-<<<<<<< HEAD:Frontend/lib/src/features/authentication/pages/signup_page/widgets/signup_form_widget.dart
 import 'package:flutter_application_1/src/features/authentication/controllers/signup_controllers.dart';
 import 'package:flutter_application_1/src/features/authentication/models/user_model.dart';
-=======
-import 'package:flutter_application_1/src/features/controllers/signup_controllers.dart';
-import 'package:flutter_application_1/src/features/models/user_model.dart';
 import 'package:flutter_application_1/src/features/pages/home_page/home_page.dart';
->>>>>>> leul:Frontend/lib/src/features/pages/signup_page/widgets/signup_form_widget.dart
 import 'package:get/get.dart';
 
 class SignUpFormWidget extends StatelessWidget {

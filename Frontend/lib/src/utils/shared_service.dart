@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:api_cache_manager/api_cache_manager.dart';
 import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/src/features/models/login_response_model.dart';
+import 'package:flutter_application_1/src/features/authentication/models/login_response_model.dart';
 import 'package:flutter_application_1/src/features/pages/home_page/home_page.dart';
 
 class SharedService {
