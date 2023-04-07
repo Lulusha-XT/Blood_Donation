@@ -25,3 +25,5 @@ const String cForgetPasswordImage =
 // Dashboard page
 
 const String cUserProfileImage = "assets/images/dashboard/user.png";
+//  --Profile Images
+const String cProfileImage = "assets/images/profile/bre.jpg";
