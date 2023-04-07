@@ -1,26 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/features/core/pages/blood_request/blood_request.dart';
+import 'package:flutter_application_1/src/features/core/pages/home_page/widget/appbar.widget.dart';
 import 'package:flutter_application_1/src/features/core/pages/home_page/widget/drawer.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  static final List<Widget> _widgetOptions = [
+    const BloodPage(),
+    const Text('Profile'),
+    const Text('Nearby'),
+    const Text('Donation'),
+    const Text('Message'),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My App'),
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            );
-          },
-        ),
+      appBar: const DashboardAppBar(),
+      drawer: MyDrawer(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
-      drawer: const MyDrawer(),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
     );
   }
 }
