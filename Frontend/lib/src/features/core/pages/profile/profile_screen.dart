@@ -20,105 +20,110 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-          child: Container(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Column(children: [
-            Container(
-              padding: const EdgeInsets.all(cDefaultSize),
-              decoration: const BoxDecoration(
-                color: cPrimaryColor,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
+        child: Container(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(cDefaultSize),
+                  decoration: const BoxDecoration(
+                    color: cPrimaryColor,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Stack(
+                      Column(
                         children: [
-                          // SizedBox(
-                          //   width: 120,
-                          //   height: 120,
-                          //   child: ClipRRect(
-                          //       borderRadius: BorderRadius.circular(100),
-                          //       child:  Image(
-                          //           image: AssetImage())),
-                          // ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Container(
-                              width: 35,
-                              height: 35,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: cPrimaryColor,
-                              ),
-                              child: IconButton(
-                                icon: const Icon(
-                                  LineAwesomeIcons.camera,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                                onPressed: () async {
-                                  //  pick imaGe
-                                  // install image_picker
-                                  // import the corresponding library
-                                  ImagePicker imagePicker = ImagePicker();
-                                  XFile? file = await imagePicker.pickImage(
-                                      source: ImageSource.camera);
-                                  print("${file?.path}");
-                                  if (file == null) return;
+                          Stack(
+                            children: [
+                              // SizedBox(
+                              //   width: 120,
+                              //   height: 120,
+                              //   child: ClipRRect(
+                              //       borderRadius: BorderRadius.circular(100),
+                              //       child:  Image(
+                              //           image: AssetImage())),
+                              // ),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: Container(
+                                  width: 35,
+                                  height: 35,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: cPrimaryColor,
+                                  ),
+                                  child: IconButton(
+                                    icon: const Icon(
+                                      LineAwesomeIcons.camera,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                    onPressed: () async {
+                                      //  pick imaGe
+                                      // install image_picker
+                                      // import the corresponding library
+                                      ImagePicker imagePicker = ImagePicker();
+                                      XFile? file = await imagePicker.pickImage(
+                                          source: ImageSource.camera);
+                                      print("${file?.path}");
+                                      if (file == null) return;
 
-                                  String uniqueFileName = DateTime.now()
-                                      .millisecondsSinceEpoch
-                                      .toString();
-                                },
+                                      String uniqueFileName = DateTime.now()
+                                          .millisecondsSinceEpoch
+                                          .toString();
+                                    },
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: const [
+                              Text(
+                                "Leul sileshi",
+                                style: TextStyle(color: Colors.white),
                               ),
-                            ),
-                          )
+                              Text("A+", style: TextStyle(color: Colors.white))
+                            ],
+                          ),
                         ],
                       ),
-                      Column(
-                        children: const [
-                          Text(
-                            "Leul sileshi",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text("A+", style: TextStyle(color: Colors.white))
-                        ],
+                      Container(
+                        width: 70,
+                        height: 70,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: cPrimaryColor,
+                        ),
+                        child: const Icon(
+                          LineAwesomeIcons.alternate_pencil,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                       ),
                     ],
                   ),
-                  Container(
-                    width: 70,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: cPrimaryColor,
-                    ),
-                    child: const Icon(
-                      LineAwesomeIcons.alternate_pencil,
+                ),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
                       color: Colors.white,
-                      size: 20,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
                     ),
                   ),
-                ],
-              ),
+                )
+              ],
             ),
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30))),
-              ),
-            )
-          ]),
+          ),
         ),
-      )),
+      ),
     );
   }
 }
