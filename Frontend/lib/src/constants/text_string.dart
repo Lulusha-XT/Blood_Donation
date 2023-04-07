@@ -57,3 +57,10 @@ const String cForgetEMailSubTitle =
 // --Forget Password Via Phone - Text
 const String cForgetPhoneSubTitle =
     "Enter your registerd Phone No to receive OTP";
+// --Dash board
+const String cBloodRequest = "Blood Request";
+const String cProfile = "Profile";
+const String cNearby = "Nearby";
+const String cDonation = "Donation";
+const String cMessage = "Message";
+const String cLogout = "Logout";

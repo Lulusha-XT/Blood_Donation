@@ -25,5 +25,8 @@ const String cForgetPasswordImage =
 // Dashboard page
 
 const String cUserProfileImage = "assets/images/dashboard/user.png";
-//  --Profile Images
-const String cProfileImage = "assets/images/profile/bre.jpg";
+
+// Blood Request Page
+const String cBloodDonorDay = "assets/images/dashboard/blood_donor_day.jpg";
+const String cWorldBloodDonorDay =
+    "assets/images/dashboard/world_blood_donor_day.png";

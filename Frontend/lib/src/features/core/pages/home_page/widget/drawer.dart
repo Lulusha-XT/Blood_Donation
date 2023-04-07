@@ -1,59 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/constants/colors.dart';
+import 'package:flutter_application_1/src/constants/text_string.dart';
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer({Key? key}) : super(key: key);
-
+  const MyDrawer(
+      {super.key, required this.selectedIndex, required this.onItemTapped});
+  final int selectedIndex;
+  final Function(int) onItemTapped;
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.white,
       child: ListView(
         children: [
           const UserAccountsDrawerHeader(
             accountName: Text('John Doe'),
             accountEmail: Text('johndoe@example.com'),
+            decoration: BoxDecoration(
+              color: cPrimaryColor,
+            ),
             currentAccountPicture: CircleAvatar(
               child: Text('JD'),
             ),
           ),
           ListTile(
+            selected: selectedIndex == 0,
+            selectedColor: cPrimaryColor,
             leading: const Icon(Icons.local_hospital),
-            title: const Text('Blood Request'),
+            title: const Text(cBloodRequest),
             onTap: () {
-              // Add your navigation logic here
+              onItemTapped(0);
             },
           ),
           ListTile(
+            selected: selectedIndex == 1,
+            selectedColor: cPrimaryColor,
             leading: const Icon(Icons.person),
-            title: const Text('Profile'),
+            title: const Text(cProfile),
             onTap: () {
-              // Add your navigation logic here
+              onItemTapped(1);
             },
           ),
           ListTile(
+            selected: selectedIndex == 2,
+            selectedColor: cPrimaryColor,
             leading: const Icon(Icons.location_on),
-            title: const Text('Nearby'),
+            title: const Text(cNearby),
             onTap: () {
-              // Add your navigation logic here
+              onItemTapped(2);
             },
           ),
           ListTile(
+            selected: selectedIndex == 3,
+            selectedColor: cPrimaryColor,
             leading: const Icon(Icons.favorite),
-            title: const Text('Donation'),
+            title: const Text(cDonation),
             onTap: () {
-              // Add your navigation logic here
+              onItemTapped(3);
             },
           ),
           ListTile(
+            selected: selectedIndex == 4,
+            selectedColor: cPrimaryColor,
             leading: const Icon(Icons.message),
-            title: const Text('Message'),
+            title: const Text(cMessage),
             onTap: () {
-              // Add your navigation logic here
+              onItemTapped(4);
             },
           ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.logout),
-            title: const Text('Logout'),
+            title: const Text(cLogout),
             onTap: () {
               // Add your logout logic here
             },
