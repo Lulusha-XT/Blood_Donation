@@ -31,18 +31,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DashboardAppBar(),
-      drawer: MyDrawer(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-    return const SafeArea(
-      child: Scaffold(
-        appBar: DashboardAppBar(),
-        drawer: MyDrawer(),
-      ),
-    );
+        appBar: const DashboardAppBar(),
+        drawer: MyDrawer(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+        ),
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ));
   }
 }

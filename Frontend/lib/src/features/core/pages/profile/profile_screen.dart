@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
-import 'package:flutter_application_1/src/constants/image_strings.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:get/get.dart';
 
@@ -37,14 +36,14 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       Stack(
                         children: [
-                          SizedBox(
-                            width: 120,
-                            height: 120,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: const Image(
-                                    image: AssetImage(cProfileImage))),
-                          ),
+                          // SizedBox(
+                          //   width: 120,
+                          //   height: 120,
+                          //   child: ClipRRect(
+                          //       borderRadius: BorderRadius.circular(100),
+                          //       child:  Image(
+                          //           image: AssetImage())),
+                          // ),
                           Positioned(
                             bottom: 0,
                             right: 0,
