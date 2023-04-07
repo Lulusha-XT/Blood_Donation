@@ -22,81 +22,153 @@ class ProfilePage extends StatelessWidget {
                 decoration: const BoxDecoration(
                   color: cPrimaryColor,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
                   children: [
-                    Column(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Stack(
+                        Row(
                           children: [
-                            SizedBox(
-                              width: 120,
-                              height: 120,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: const Image(
-                                  image: AssetImage(cProfileImage),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: Container(
-                                width: 35,
-                                height: 35,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: cPrimaryColor,
-                                ),
-                                child: IconButton(
-                                  icon: const Icon(
-                                    LineAwesomeIcons.camera,
-                                    color: Colors.white,
-                                    size: 20,
+                            Stack(
+                              children: [
+                                SizedBox(
+                                  width: 70,
+                                  height: 70,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: const Image(
+                                      image: AssetImage(cProfileImage),
+                                    ),
                                   ),
-                                  onPressed: () async {
-                                    //  pick imaGe
-                                    // install image_picker
-                                    // import the corresponding library
-                                    ImagePicker imagePicker = ImagePicker();
-                                    XFile? file = await imagePicker.pickImage(
-                                        source: ImageSource.camera);
-                                    print("${file?.path}");
-                                    if (file == null) return;
-
-                                    String uniqueFileName = DateTime.now()
-                                        .millisecondsSinceEpoch
-                                        .toString();
-                                  },
                                 ),
-                              ),
-                            )
+                                Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: Container(
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      color: cPrimaryColor,
+                                    ),
+                                    child: IconButton(
+                                      icon: const Icon(
+                                        LineAwesomeIcons.camera,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                      onPressed: () async {
+                                        //  pick imaGe
+                                        // install image_picker
+                                        // import the corresponding library
+                                        ImagePicker imagePicker = ImagePicker();
+                                        XFile? file =
+                                            await imagePicker.pickImage(
+                                                source: ImageSource.camera);
+                                        print("${file?.path}");
+                                        if (file == null) return;
+
+                                        String uniqueFileName = DateTime.now()
+                                            .millisecondsSinceEpoch
+                                            .toString();
+                                      },
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(width: 20),
+                            Column(
+                              children: const [
+                                Text(
+                                  "Leul sileshi",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text("A+",
+                                    style: TextStyle(color: Colors.white))
+                              ],
+                            ),
                           ],
                         ),
-                        Column(
-                          children: const [
-                            Text(
-                              "Leul sileshi",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            Text("A+", style: TextStyle(color: Colors.white))
-                          ],
+                        Container(
+                          width: 70,
+                          height: 70,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: cPrimaryColor,
+                          ),
+                          child: const Icon(
+                            LineAwesomeIcons.alternate_pencil,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                         ),
                       ],
                     ),
-                    Container(
-                      width: 70,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: cPrimaryColor,
-                      ),
-                      child: const Icon(
-                        LineAwesomeIcons.alternate_pencil,
-                        color: Colors.white,
-                        size: 20,
-                      ),
+                    const SizedBox(height: 10.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          height: 50,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6.0),
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 1.3,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  Text(
+                                    'Birth Date',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 150,
+                          height: 50,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6.0),
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 1.3,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  Text(
+                                    'Blood Type',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -111,8 +183,10 @@ class ProfilePage extends StatelessWidget {
                       topRight: Radius.circular(30),
                     ),
                   ),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child: Container(
+                    padding: const EdgeInsets.all(cDefaultSize),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
@@ -183,7 +257,9 @@ class ProfilePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ]),
+                      ],
+                    ),
+                  ),
                 ),
               )
             ],
