@@ -8,6 +8,7 @@ interface IUser {
   phoneNo: string;
   dateOfBirth?: string;
   medicalCondition?: string;
+  profilePicture?: string;
 }
 
 interface IUserDocument extends IUser, Document {
