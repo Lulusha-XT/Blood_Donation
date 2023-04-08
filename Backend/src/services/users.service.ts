@@ -75,12 +75,23 @@ export const getAllUser = async (
   }
 };
 
+// Get user by id
+
+export const getUserById = async (id: string): Promise<IUserDocument> => {
+  try {
+    const user = await User.findById(id).lean();
+    return user as IUserDocument;
+  } catch (error) {
+    throw new Error(`Retriving user faild`);
+  }
+};
+
 // Dellete user
 export const deleteUser = async (id: string) => {
   try {
     const user = await User.findById(id).lean();
     return user;
   } catch (error) {
-    throw new Error(`Delere failed ${error}`);
+    throw new Error(`Delete failed ${error}`);
   }
 };

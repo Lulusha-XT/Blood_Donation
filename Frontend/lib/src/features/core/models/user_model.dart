@@ -1,13 +1,13 @@
 class UserModel {
-  final String? id;
-  final String fullName;
-  final String email;
-  final String phoneNo;
+  late final String? id;
+  late final String fullName;
+  late final String email;
+  late final String phoneNo;
   final String password;
-  final String bloodType;
-  final String? profilePicture;
+  late final String bloodType;
+  late final String? profilePicture;
 
-  const UserModel({
+  UserModel({
     this.id,
     required this.email,
     required this.password,
@@ -17,27 +17,27 @@ class UserModel {
     this.profilePicture,
   });
 
-  // factory UserModel.fromSnapshot(
-  //     DocumentSnapshot<Map<String, dynamic>> document) {
-  //   final data = document.data()!;
-  //   return UserModel(
-  //     id: document.id,
-  //     email: data["Email"],
-  //     fullName: data["FullName"],
-  //     password: data["Password"],
-  //     phoneNo: data["Phone"],
-  //     profilePicture: data["ProfilePicture"],
-  //   );
-  // }
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json["userId"],
+      email: json["email"],
+      fullName: json["fullName"],
+      phoneNo: json["phoneNo"],
+      password: json["password"],
+      bloodType: json["bloodType"],
+      profilePicture: json["profilePicture"],
+    );
+  }
 
-  toJosn() {
+  Map<String, dynamic> toJson() {
     return {
-      "FullName": fullName,
-      "Email": email,
-      "Phone": phoneNo,
-      "Password": password,
+      "userId": id,
+      "email": email,
+      "fullName": fullName,
+      "phoneNo": phoneNo,
+      "password": password,
       "bloodType": bloodType,
-      "ProfilePicture": profilePicture,
+      "profilePicture": profilePicture,
     };
   }
 }

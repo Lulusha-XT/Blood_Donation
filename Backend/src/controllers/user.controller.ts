@@ -34,6 +34,15 @@ const getAllUser = async (req: Request, res: Response, next: Function) => {
   }
 };
 
+const getUserById = async (req: Request, res: Response, next: Function) => {
+  try {
+    const userWithId = await userServices.getUserById(req.params.id);
+    return res.json({ message: "Success", data: userWithId });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 const userLogin = async (req: Request, res: Response, next: Function) => {
   try {
     const { email, password } = req.body;
@@ -65,7 +74,7 @@ const user_routes = (router: Router) => {
   router.route("/").get(getAllUser);
   router.route("/register").post(createUser);
   router.route("/login").post(userLogin);
-  router.route("/:id").delete(deleteUser);
+  router.route("/:id").delete(deleteUser).get(getUserById);
 };
 
 export default user_routes;
