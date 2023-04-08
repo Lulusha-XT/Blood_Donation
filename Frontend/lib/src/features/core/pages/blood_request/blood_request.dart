@@ -24,12 +24,12 @@ class BloodPage extends StatelessWidget {
             myRequestWidget(),
             const SizedBox(height: 16),
             _buildCard('Blood Donation', 'Donate blood and save lives',
-                Icons.favorite, Colors.red, () {
+                Icons.favorite, Colors.white, () {
               // Implement blood donation logic here
             }),
             const SizedBox(height: 16),
             _buildCard('Blood Request', 'Request blood from donors',
-                Icons.search, Colors.blue, () {
+                Icons.search, Colors.white, () {
               // Implement blood request logic here
             }),
           ],
@@ -119,8 +119,13 @@ class BloodPage extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
+        side: const BorderSide(
+          color: Colors.red,
+          width: 1.0,
+        ),
       ),
       color: color,
+      elevation: 3.0,
       child: InkWell(
         borderRadius: BorderRadius.circular(16.0),
         onTap: onPressed,
@@ -131,14 +136,14 @@ class BloodPage extends StatelessWidget {
             children: [
               Icon(
                 iconData,
-                color: Colors.white,
+                color: Colors.red,
                 size: 48,
               ),
               const SizedBox(height: 16),
               Text(
                 title,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Colors.red,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
@@ -147,7 +152,7 @@ class BloodPage extends StatelessWidget {
               Text(
                 subtitle,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Colors.red,
                   fontSize: 16,
                 ),
               ),
@@ -164,7 +169,7 @@ class BloodPage extends StatelessWidget {
       child: Container(
         height: 60,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6.0),
+          borderRadius: BorderRadius.circular(15.0),
           border: Border.all(
             color: Colors.red,
             width: 1.3,

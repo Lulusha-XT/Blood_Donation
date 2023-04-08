@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/image_strings.dart';
 import 'package:flutter_application_1/src/features/core/pages/profile/profile_page.dart';
 import 'package:get/get.dart';
@@ -28,8 +27,6 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Container(
           margin: const EdgeInsets.only(right: 20, left: 7),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: cCardBgColor),
           child: IconButton(
             onPressed: () {
               Get.to(() => const ProfilePage());
