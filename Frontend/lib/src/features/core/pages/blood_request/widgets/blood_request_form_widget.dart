@@ -11,37 +11,23 @@ import 'package:flutter_application_1/src/features/core/models/user_model.dart';
 import 'package:flutter_application_1/src/features/core/pages/dashboard_page/home_page.dart';
 import 'package:get/get.dart';
 
-class SignUpFormWidget extends StatelessWidget {
-  const SignUpFormWidget({
-    super.key,
-  });
+class BloodRequiestFormWidget extends StatelessWidget {
+  const BloodRequiestFormWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controllers = Get.put(SignUpControllers());
     final formKey = GlobalKey<FormState>();
-
     return Form(
       key: formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextFormField(
-              controller: controllers.fullname,
-              decoration: const InputDecoration(
-                label: Text(cFullName),
-                prefixIcon: Icon(Icons.person_outline_rounded),
-              ),
-              validator: (value) => validate(value, cFullName)),
-          const SizedBox(height: cFormHeigth - 20),
-          // set the default value to 'A'
-
-// build the DropdownButtonFormField widget
           DropdownButtonFormField<String>(
             value: controllers.defaultValue, // set the default value here
             decoration: const InputDecoration(
               label: Text(cBloodType),
-              prefixIcon: Icon(Icons.person_outline_rounded),
+              prefixIcon: Icon(Icons.bloodtype),
             ),
             items: <String>['A', 'B', 'AB', 'O']
                 .map<DropdownMenuItem<String>>((String value) {
@@ -57,43 +43,72 @@ class SignUpFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: cFormHeigth - 20),
           TextFormField(
-              controller: controllers.email,
-              decoration: const InputDecoration(
-                label: Text(cEmail),
-                prefixIcon: Icon(Icons.email_outlined),
-              ),
-              validator: validateEmail),
+            controller: controllers.fullname,
+            decoration: const InputDecoration(
+              label: Text(cReason),
+              prefixIcon: Icon(Icons.abc_outlined),
+            ),
+            validator: (value) => validate(value, cFullName),
+          ),
+          const SizedBox(height: cFormHeigth - 20),
+          // set the default value to 'A'
+
+// build the DropdownButtonFormField widget
+          const SizedBox(height: cFormHeigth - 20),
+          TextFormField(
+            controller: controllers.email,
+            decoration: const InputDecoration(
+              label: Text(cUnitRequired),
+              prefixIcon: Icon(Icons.ac_unit),
+            ),
+            validator: validateEmail,
+          ),
           const SizedBox(height: cFormHeigth - 20),
           TextFormField(
             controller: controllers.phoneNo,
             decoration: const InputDecoration(
-              label: Text(cPhoneNumber),
-              prefixIcon: Icon(Icons.phone_outlined),
+              label: Text(cDeadLine),
+              prefixIcon: Icon(Icons.dangerous),
             ),
             validator: (value) => validate(value, cPhoneNumber),
           ),
           const SizedBox(height: cFormHeigth - 20),
-          Obx(() => TextFormField(
-                controller: controllers.password,
-                decoration: InputDecoration(
-                  label: const Text(cPassword),
-                  prefixIcon: const Icon(Icons.key_outlined),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      controllers.hidePassword.value =
-                          !controllers.hidePassword.value;
-                    },
-                    color: Colors.redAccent.withOpacity(.4),
-                    icon: Icon(
-                      controllers.hidePassword.value
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                    ),
-                  ),
-                ),
-                validator: (value) => validate(value, cPassword),
-                obscureText: controllers.hidePassword.value,
-              )),
+          TextFormField(
+            controller: controllers.password,
+            decoration: const InputDecoration(
+              label: Text(cHospital),
+              prefixIcon: Icon(Icons.local_hospital_outlined),
+            ),
+            validator: (value) => validate(value, cPassword),
+            obscureText: controllers.hidePassword.value,
+          ),
+          const SizedBox(height: cFormHeigth - 20),
+          TextFormField(
+            controller: controllers.password,
+            decoration: const InputDecoration(
+              label: Text(cPersonInCharge),
+              prefixIcon: Icon(Icons.person),
+            ),
+            validator: (value) => validate(value, cPassword),
+          ),
+          const SizedBox(height: cFormHeigth - 20),
+          TextFormField(
+            controller: controllers.password,
+            decoration: const InputDecoration(
+              label: Text(cContactNumber),
+              prefixIcon: Icon(Icons.contact_emergency),
+            ),
+            validator: (value) => validate(value, cPassword),
+          ),
+          const SizedBox(height: cFormHeigth - 20),
+          TextFormField(
+            controller: controllers.password,
+            decoration: const InputDecoration(
+              label: Text(cPatientName),
+              prefixIcon: Icon(Icons.local_hospital),
+            ),
+            validator: (value) => validate(value, cPassword),
+          ),
 
           const SizedBox(height: cFormHeigth - 10),
 
@@ -135,7 +150,7 @@ class SignUpFormWidget extends StatelessWidget {
                                       return AlertDialog(
                                         title: const Text(Config.appName),
                                         content: const Text(
-                                            "Registration completed successfully"),
+                                            "Blood requiest completed successfully"),
                                         actions: <Widget>[
                                           TextButton(
                                             child: const Text("Ok"),
@@ -198,7 +213,7 @@ class SignUpFormWidget extends StatelessWidget {
                           //   Get.to(() => const OTPScrenn());
                         }
                       },
-                      child: Text(cSignup.toUpperCase()),
+                      child: Text(cRequest.toUpperCase()),
                     ),
                   ),
           ),

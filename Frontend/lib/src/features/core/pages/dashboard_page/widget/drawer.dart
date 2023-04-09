@@ -26,8 +26,8 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             selected: selectedIndex == 0,
             selectedColor: cPrimaryColor,
-            leading: const Icon(Icons.local_hospital),
-            title: const Text(cBloodRequest),
+            leading: const Icon(Icons.home_filled),
+            title: const Text(cHome),
             onTap: () {
               onItemTapped(0);
             },
@@ -44,8 +44,8 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             selected: selectedIndex == 2,
             selectedColor: cPrimaryColor,
-            leading: const Icon(Icons.location_on),
-            title: const Text(cNearby),
+            leading: const Icon(Icons.local_hospital),
+            title: const Text(cBloodRequest),
             onTap: () {
               onItemTapped(2);
             },
@@ -53,8 +53,8 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             selected: selectedIndex == 3,
             selectedColor: cPrimaryColor,
-            leading: const Icon(Icons.favorite),
-            title: const Text(cDonation),
+            leading: const Icon(Icons.location_on),
+            title: const Text(cNearby),
             onTap: () {
               onItemTapped(3);
             },
@@ -62,10 +62,19 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             selected: selectedIndex == 4,
             selectedColor: cPrimaryColor,
+            leading: const Icon(Icons.favorite),
+            title: const Text(cDonation),
+            onTap: () {
+              onItemTapped(4);
+            },
+          ),
+          ListTile(
+            selected: selectedIndex == 5,
+            selectedColor: cPrimaryColor,
             leading: const Icon(Icons.message),
             title: const Text(cMessage),
             onTap: () {
-              onItemTapped(4);
+              onItemTapped(5);
             },
           ),
           const Divider(),

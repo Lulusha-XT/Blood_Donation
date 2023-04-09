@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/features/core/pages/home_page/home_page.dart';
+import 'package:flutter_application_1/src/features/core/pages/dashboard_page/home_page.dart';
 import 'package:flutter_application_1/src/features/core/pages/splash_page/splash_screen.dart';
 import 'package:flutter_application_1/src/utils/themes/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

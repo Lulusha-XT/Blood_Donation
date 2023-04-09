@@ -5,7 +5,7 @@ import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
 import 'package:flutter_application_1/src/features/authentication/controllers/signin_controllers.dart';
-import 'package:flutter_application_1/src/features/core/pages/home_page/home_page.dart';
+import 'package:flutter_application_1/src/features/core/pages/dashboard_page/home_page.dart';
 import 'package:get/get.dart';
 
 class SignInForm extends StatelessWidget {

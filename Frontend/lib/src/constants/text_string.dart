@@ -58,9 +58,20 @@ const String cForgetEMailSubTitle =
 const String cForgetPhoneSubTitle =
     "Enter your registerd Phone No to receive OTP";
 // --Dash board
-const String cBloodRequest = "Blood Request";
+const String cHome = "Home";
 const String cProfile = "Profile";
+const String cBloodRequest = "Blood Request";
 const String cNearby = "Nearby";
 const String cDonation = "Donation";
 const String cMessage = "Message";
 const String cLogout = "Logout";
+
+// --Blood Request Page
+const String cReason = "Reason";
+const String cUnitRequired = "UnitRequired";
+const String cDeadLine = "DeadLine";
+const String cHospital = "Hospital";
+const String cPersonInCharge = "Person In Charge";
+const String cContactNumber = "Contact Number";
+const String cPatientName = "Patient Name";
+const String cRequest = "Request";
