@@ -10,9 +10,9 @@ interface IRequest extends Request {
   user?: IUser;
 }
 
-// interface ITokenData {
-//   data: IUser;
-// }
+interface ITokenData {
+  data: IUser;
+}
 
 const assignAccessToken = (user: IUser): string => {
   // const tokenData: ITokenData = { data: user };
@@ -31,6 +31,7 @@ const verifyToken = (req: IRequest, res: Response, next: Function) => {
 
   try {
     const decodedToken = jwt.verify(token!, secret) as IUser;
+    console.log(`Print Message ${decodedToken}`);
     req.user = decodedToken;
     next();
   } catch (error) {

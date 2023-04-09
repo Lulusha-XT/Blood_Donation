@@ -1,43 +1,51 @@
 class UserModel {
-  final String? id;
-  final String fullName;
-  final String email;
-  final String phoneNo;
-  final String password;
-  final String bloodType;
-  final String? profilePicture;
+  String? id;
+  String fullName;
+  String email;
+  String phoneNo;
+  String? password;
+  String bloodType;
+  String? profilePicture;
+  String? medicalCondition;
+  String? dateOfBirth;
 
-  const UserModel({
+  UserModel({
     this.id,
     required this.email,
-    required this.password,
+    this.password,
     required this.bloodType,
     required this.fullName,
     required this.phoneNo,
     this.profilePicture,
+    this.medicalCondition,
+    this.dateOfBirth,
   });
 
-  // factory UserModel.fromSnapshot(
-  //     DocumentSnapshot<Map<String, dynamic>> document) {
-  //   final data = document.data()!;
-  //   return UserModel(
-  //     id: document.id,
-  //     email: data["Email"],
-  //     fullName: data["FullName"],
-  //     password: data["Password"],
-  //     phoneNo: data["Phone"],
-  //     profilePicture: data["ProfilePicture"],
-  //   );
-  // }
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json["userId"],
+      fullName: json["fullName"],
+      email: json["email"],
+      phoneNo: json["phoneNo"],
+      password: json["password"],
+      bloodType: json["bloodType"],
+      profilePicture: json["profilePicture"],
+      medicalCondition: json["medicalCondition"],
+      dateOfBirth: json["dateOfBirth"],
+    );
+  }
 
-  toJosn() {
+  Map<String, dynamic> toJson() {
     return {
-      "FullName": fullName,
-      "Email": email,
-      "Phone": phoneNo,
-      "Password": password,
+      "userId": id,
+      "email": email,
+      "fullName": fullName,
+      "phoneNo": phoneNo,
+      "password": password,
       "bloodType": bloodType,
-      "ProfilePicture": profilePicture,
+      "profilePicture": profilePicture,
+      "medicalCondition": medicalCondition,
+      "dateOfBirth": dateOfBirth,
     };
   }
 }

@@ -22,6 +22,7 @@ const createUser = async (req: Request, res: Response, next: Function) => {
 
 const getAllUser = async (req: Request, res: Response, next: Function) => {
   try {
+    console.log("GetAllUser Executed");
     const pagination: Pagination = {
       page: req.query.page?.toString(),
       pageSize: req.query.pageSize?.toString(),
@@ -29,6 +30,16 @@ const getAllUser = async (req: Request, res: Response, next: Function) => {
 
     const allUsers = await userServices.getAllUser(pagination);
     return res.json({ message: "Success", data: allUsers });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const getUserById = async (req: Request, res: Response, next: Function) => {
+  try {
+    console.log("GetUserById Executed");
+    const userWithId = await userServices.getUserById(req.params.id);
+    return res.json({ message: "Success", data: userWithId });
   } catch (error) {
     return next(error);
   }
@@ -62,10 +73,11 @@ const deleteUser = async (req: Request, res: Response, next: Function) => {
 };
 
 const user_routes = (router: Router) => {
-  router.route("/").get(getAllUser);
-  router.route("/register").post(createUser);
-  router.route("/login").post(userLogin);
-  router.route("/:id").delete(deleteUser);
+  router.get("/", getAllUser);
+  router.get("/:id", getUserById);
+  router.post("/register", createUser);
+  router.post("/login", userLogin);
+  router.delete("/:id", deleteUser);
 };
 
 export default user_routes;

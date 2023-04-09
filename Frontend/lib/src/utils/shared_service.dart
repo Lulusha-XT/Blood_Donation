@@ -22,7 +22,7 @@ class SharedService {
     await APICacheManager().addCacheData(cacheDBModel);
   }
 
-  static Future<LoginResponseModel?> loinDetails() async {
+  static Future<LoginResponseModel?> loginDetails() async {
     var isCacheKeyExists = await APICacheManager().isAPICacheKeyExist(KEY_NAME);
 
     if (isCacheKeyExists) {
