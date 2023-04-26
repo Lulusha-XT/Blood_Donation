@@ -3,18 +3,22 @@ import 'package:flutter_application_1/src/common_widgets/circularProgressBar/cir
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
 import 'package:flutter_application_1/src/features/core/controllers/update_profile_controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../constants/colors.dart';
+import '../../../../../providers/providers.dart';
 import '../../../../authentication/models/user_model.dart';
 import '../../dashboard_page/home_page.dart';
 
-class UpdateProfileWidget extends StatelessWidget {
+class UpdateProfileWidget extends ConsumerWidget {
   const UpdateProfileWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userInfoNotifier = ref.read(userInfoNotifierProvider);
+
     final controllers = Get.put(UpdateProfileController());
     final formKey = GlobalKey<FormState>();
 
@@ -140,6 +144,7 @@ class UpdateProfileWidget extends StatelessWidget {
                                               //   "/login",
                                               //   (route) => false,
                                               // );
+                                              ref.read(userProvider);
                                               Get.to(() => const HomePage());
                                             },
                                           ),

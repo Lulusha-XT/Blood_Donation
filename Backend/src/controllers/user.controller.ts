@@ -2,6 +2,8 @@ import { Request, Response, Router } from "express";
 import { IUser, User } from "../models/user.model";
 import * as userServices from "../services/users.service";
 import { Pagination } from "../types/pagination.types";
+import { verifyToken } from "../middlewares/auth";
+import { IRequest } from "../interface/user.interface";
 
 const createUser = async (req: Request, res: Response, next: Function) => {
   try {
@@ -38,7 +40,10 @@ const getAllUser = async (req: Request, res: Response, next: Function) => {
 const getUserById = async (req: Request, res: Response, next: Function) => {
   try {
     console.log("GetUserById Executed");
-    const userWithId = await userServices.getUserById(req.params.id);
+    console.log(req.params.id);
+    const userWithId = await userServices.getUserById(
+      req.params.id!.toString()
+    );
     return res.json({ message: "Success", data: userWithId });
   } catch (error) {
     return next(error);
@@ -72,9 +77,13 @@ const deleteUser = async (req: Request, res: Response, next: Function) => {
   }
 };
 
-const updatedUserById = async (req: Request, res: Response, next: Function) => {
+const updatedUserById = async (
+  req: IRequest,
+  res: Response,
+  next: Function
+) => {
   try {
-    const id = req.query.id?.toString();
+    const id = req.user!.userId;
     const user: IUser = {
       fullName: req.body.fullName,
       email: req.body.email,
@@ -97,7 +106,7 @@ const user_routes = (router: Router) => {
   router.get("/:id", getUserById);
   router.post("/register", createUser);
   router.post("/login", userLogin);
-  router.put("/update", updatedUserById);
+  router.put("/update", verifyToken, updatedUserById);
   router.delete("/:id", deleteUser);
 };
 

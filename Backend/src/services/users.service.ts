@@ -79,17 +79,20 @@ export const getAllUser = async (
 
 export const getUserById = async (id: string): Promise<IUserDocument> => {
   try {
-    const user = await User.findOne({ id });
-    return user as IUserDocument;
+    const user = await User.findById(id); // Find the user by ID
+    if (!user) throw new Error("User not found"); // Throw an error if the user is not found
+    return user; // Return the user if it exists
   } catch (error) {
-    throw new Error(`Retriving user faild`);
+    throw new Error(`Retrieving user failed: ${error}`);
   }
 };
+
 export const updateUserById = async (
   id: string,
   user: IUser
 ): Promise<IUser | null> => {
   try {
+    console.log("Updated Excuted");
     const updatedUser = await User.findByIdAndUpdate(id, user, {
       new: true,
     });
