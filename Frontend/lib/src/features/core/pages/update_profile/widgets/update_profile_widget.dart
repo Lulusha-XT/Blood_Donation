@@ -192,7 +192,7 @@ class UpdateProfileWidget extends StatelessWidget {
                           //   Get.to(() => const OTPScrenn());
                         }
                       },
-                      child: Text("Update"),
+                      child: const Text("Update"),
                     ),
                   ),
           ),
@@ -201,10 +201,11 @@ class UpdateProfileWidget extends StatelessWidget {
     );
   }
 
-  validate(value, String cFullName) {
-    if (value!.isEmpty) {
-      return "$cFullName isrequired";
+  String? validate(String? value, String cFullName) {
+    if (value?.isEmpty ?? true) {
+      return "$cFullName is required";
     }
+
     return null;
   }
 

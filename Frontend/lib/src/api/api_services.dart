@@ -81,7 +81,7 @@ class ApiService {
     }
   }
 
-  Future<bool?> updtaProfile(UserModel user) async {
+  static Future<bool> updtaProfile(UserModel user) async {
     var lodingDetail = await SharedService.loginDetails();
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
@@ -91,16 +91,23 @@ class ApiService {
     var response = await client.put(
       url,
       headers: requestHeaders,
-      body: jsonEncode({user.toJson()}),
+      body: jsonEncode({
+        "fullName": user.fullName,
+        "email": user.email,
+        "password": user.password,
+        "phoneNo": user.phoneNo,
+        "bloodType": user.bloodType,
+      }),
     );
     if (response.statusCode == 200) {
       return true;
-    } else if (response.statusCode == 401) {
-      // navigatorKey.currentState
-      //     ?.pushNamedAndRemoveUntil("/login", (route) => false);
-    } else {
+    }
+    // else if (response.statusCode == 401) {
+    //   // navigatorKey.currentState
+    //   //     ?.pushNamedAndRemoveUntil("/login", (route) => false);
+    // }
+    else {
       return false;
     }
-    return null;
   }
 }

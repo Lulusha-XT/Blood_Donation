@@ -25,9 +25,9 @@ class ProfilePage extends ConsumerWidget {
   }
 
   Widget _userData(WidgetRef ref, BuildContext context) {
-    final products = ref.watch(userProvider);
+    final user = ref.watch(userProvider);
 
-    return products.when(
+    return user.when(
         data: (user) {
           return _profileMainComps(user!, context);
         },
@@ -78,7 +78,7 @@ class ProfilePage extends ConsumerWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => UpdateProfilePage());
+                          Get.to(() => const UpdateProfilePage());
                         },
                         child: Container(
                           width: 70,
