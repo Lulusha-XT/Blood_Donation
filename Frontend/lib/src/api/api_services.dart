@@ -80,4 +80,27 @@ class ApiService {
       return null;
     }
   }
+
+  Future<bool?> updtaProfile(UserModel user) async {
+    var lodingDetail = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ${lodingDetail?.data.token.toString()}'
+    };
+    var url = Uri.http(Config.apiURL, Config.updateUserById);
+    var response = await client.put(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode({user.toJson()}),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else if (response.statusCode == 401) {
+      // navigatorKey.currentState
+      //     ?.pushNamedAndRemoveUntil("/login", (route) => false);
+    } else {
+      return false;
+    }
+    return null;
+  }
 }

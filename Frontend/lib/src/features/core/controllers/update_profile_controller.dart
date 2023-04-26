@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../authentication/models/user_model.dart';
+
 class UpdateProfileController extends GetxController {
   static UpdateProfileController get instance => Get.find();
 
@@ -14,5 +16,7 @@ class UpdateProfileController extends GetxController {
   final hidePassword = true.obs;
   RxBool isAsyncCallProcess = false.obs;
 
-  // Future<bool> updateUser(UserModel user) async {}
+  Future<bool> updateUser(UserModel user) async {
+    return true;
+  }
 }

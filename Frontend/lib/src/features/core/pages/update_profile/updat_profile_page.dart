@@ -57,31 +57,6 @@ class UpdateProfilePage extends StatelessWidget {
                             String uniqueFileName = DateTime.now()
                                 .millisecondsSinceEpoch
                                 .toString();
-                            // upload to fire base
-                            // install firebase_storage
-                            // import the library
-
-                            // Get a reference to storage root
-                            // Reference referenceRoot =
-                            //     FirebaseStorage.instance.ref();
-                            // Reference referenceDirImages =
-                            //     referenceRoot.child("images");
-
-                            // // Create a reference for the image to be stored
-                            // Reference referenceImageToUpload =
-                            //     referenceDirImages.child(uniqueFileName);
-
-                            // // Store
-                            // // Handle
-                            // try {
-                            //   await referenceImageToUpload
-                            //       .putFile(File(file.path));
-
-                            //   imageUrl =
-                            //       await referenceImageToUpload.getDownloadURL();
-                            // } catch (e) {
-                            //   // some error
-                            // }
                           },
                         ),
                       ),
