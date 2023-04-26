@@ -19,6 +19,7 @@ class UpdateProfileController extends GetxController {
 
   Future<bool> updateUser(UserModel user) async {
     bool result = await ApiService.updtaProfile(user);
+    isAsyncCallProcess.value = false;
     return result;
   }
 }
