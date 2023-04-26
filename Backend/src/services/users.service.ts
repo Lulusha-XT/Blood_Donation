@@ -85,7 +85,19 @@ export const getUserById = async (id: string): Promise<IUserDocument> => {
     throw new Error(`Retriving user faild`);
   }
 };
-
+export const updateUserById = async (
+  id: string,
+  user: IUser
+): Promise<IUser | null> => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(id, user, {
+      new: true,
+    });
+    return updatedUser;
+  } catch (err) {
+    throw new Error(`Updating user failed: ${err}`);
+  }
+};
 // Dellete user
 export const deleteUser = async (id: string) => {
   try {

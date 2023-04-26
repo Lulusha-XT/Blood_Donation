@@ -72,11 +72,32 @@ const deleteUser = async (req: Request, res: Response, next: Function) => {
   }
 };
 
+const updatedUserById = async (req: Request, res: Response, next: Function) => {
+  try {
+    const id = req.query.id?.toString();
+    const user: IUser = {
+      fullName: req.body.fullName,
+      email: req.body.email,
+      password: req.body.password,
+      phoneNo: req.body.phoneNo,
+      bloodType: req.body.bloodType,
+    };
+    console.log(user);
+    const updatedUser = await userServices.updateUserById(
+      id?.toString()!,
+      user
+    );
+    return res.json({ message: "Success", data: updatedUser });
+  } catch (error) {
+    return next(error);
+  }
+};
 const user_routes = (router: Router) => {
   router.get("/", getAllUser);
   router.get("/:id", getUserById);
   router.post("/register", createUser);
   router.post("/login", userLogin);
+  router.put("/update", updatedUserById);
   router.delete("/:id", deleteUser);
 };
 
