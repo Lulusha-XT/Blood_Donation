@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
-import 'package:flutter_application_1/src/features/core/pages/blood_request/widgets/carousel_slider_widget.dart';
+import 'package:flutter_application_1/src/features/core/pages/home_page/widgets/carousel_slider_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final locationProvider = StateProvider<String>((ref) => 'Location');

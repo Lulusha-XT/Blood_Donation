@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/features/core/pages/blood_request/blood_request.dart';
-import 'package:flutter_application_1/src/features/core/pages/home_page/widget/appbar.widget.dart';
-import 'package:flutter_application_1/src/features/core/pages/home_page/widget/drawer.dart';
+import 'package:flutter_application_1/src/features/core/pages/blood_request/blood_requiest_page.dart';
+import 'package:flutter_application_1/src/features/core/pages/home_page/blood_request.dart';
+import 'package:flutter_application_1/src/features/core/pages/dashboard_page/widget/appbar.widget.dart';
+import 'package:flutter_application_1/src/features/core/pages/dashboard_page/widget/drawer.dart';
 import 'package:flutter_application_1/src/features/core/pages/profile/profile_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   static final List<Widget> _widgetOptions = [
     const BloodPage(),
     const ProfilePage(),
+    const BloodRequestPage(),
     const Text('Nearby'),
     const Text('Donation'),
     const Text('Message'),

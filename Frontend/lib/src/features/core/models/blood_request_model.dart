@@ -19,7 +19,21 @@ class BloodRequest {
     required this.patientName,
     required this.userId,
   });
-  toJosn() {
+
+  factory BloodRequest.fromJson(Map<String, dynamic> json) {
+    return BloodRequest(
+      bloodType: json["bloodType"],
+      reason: json["reason"],
+      unitRequired: json["unitRequired"],
+      deadLine: json["deadLine"],
+      hospital: json["hospital"],
+      personInCharge: json["personInCharge"],
+      contactNumber: json["contactNumber"],
+      patientName: json["patientName"],
+      userId: json["userId"],
+    );
+  }
+  Map<String, dynamic> toJson() {
     return {
       "bloodType": bloodType,
       "reason": reason,
