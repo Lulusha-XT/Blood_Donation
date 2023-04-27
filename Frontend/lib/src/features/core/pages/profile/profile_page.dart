@@ -13,28 +13,33 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
-class ProfilePage extends ConsumerWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.red,
-      body: _userData(ref, context),
+      body: _userData(context),
     );
   }
 
-  Widget _userData(WidgetRef ref, BuildContext context) {
-    final user = ref.watch(userProvider);
-
-    return user.when(
-        data: (user) {
-          return _profileMainComps(user!, context);
-        },
-        error: (_, __) {
-          return const Center(child: Text("ERROR"));
-        },
-        loading: () => const Center(child: CircularProgressIndicator()));
+  Widget _userData(BuildContext context) {
+    return Consumer(
+      builder: (context, ref, _) {
+        final user = ref.watch(userProvider);
+        if (user.id == null) {
+          // fetch user data
+          ref.read(userProvider.notifier).getUser();
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          // show user profile page
+          return _profileMainComps(user, context);
+        }
+      },
+    );
   }
 
   Widget _profileMainComps(UserModel user, BuildContext context) {

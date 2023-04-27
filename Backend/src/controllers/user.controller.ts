@@ -83,6 +83,7 @@ const updatedUserById = async (
   next: Function
 ) => {
   try {
+    console.log(req.body.email);
     const id = req.user!.userId;
     const user: IUser = {
       fullName: req.body.fullName,
@@ -91,7 +92,7 @@ const updatedUserById = async (
       phoneNo: req.body.phoneNo,
       bloodType: req.body.bloodType,
     };
-    console.log(user);
+
     const updatedUser = await userServices.updateUserById(
       id?.toString()!,
       user

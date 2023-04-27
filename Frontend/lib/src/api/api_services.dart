@@ -81,7 +81,7 @@ class ApiService {
     }
   }
 
-  static Future<bool> updtaProfile(UserModel user) async {
+  Future<bool> updtaProfile(UserModel user) async {
     var lodingDetail = await SharedService.loginDetails();
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',

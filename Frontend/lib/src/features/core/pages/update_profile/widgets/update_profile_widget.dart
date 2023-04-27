@@ -17,8 +17,6 @@ class UpdateProfileWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userInfoNotifier = ref.read(userInfoNotifierProvider);
-
     final controllers = Get.put(UpdateProfileController());
     final formKey = GlobalKey<FormState>();
 
@@ -121,8 +119,9 @@ class UpdateProfileWidget extends ConsumerWidget {
                           // SignUpControllers.instance
                           //     .registerUser(user.email, user.password);
                           try {
-                            await UpdateProfileController.instance
-                                    .updateUser(user)
+                            await ref
+                                    .watch(userProvider.notifier)
+                                    .updateUserInfo(user)
                                 ?
 
                                 // If the registration was successful
