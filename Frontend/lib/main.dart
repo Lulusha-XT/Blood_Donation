@@ -14,7 +14,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   bool result = await SharedService.isLoggedIn();
-  print(result);
+
   if (result) {
     _defoultHome = const HomePage();
   }
