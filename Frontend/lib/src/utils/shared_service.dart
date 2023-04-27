@@ -4,13 +4,13 @@ import 'package:api_cache_manager/api_cache_manager.dart';
 import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/src/features/authentication/models/login_response_model.dart';
-import 'package:flutter_application_1/src/features/core/pages/dashboard_page/home_page.dart';
 
 class SharedService {
   static const String KEY_NAME = "login_key";
+
   static Future<bool> isLoggedIn() async {
-    var isCacheKeyExists = await APICacheManager().isAPICacheKeyExist(KEY_NAME);
-    return isCacheKeyExists;
+    var isCacheKeyExit = await APICacheManager().isAPICacheKeyExist(KEY_NAME);
+    return isCacheKeyExit;
   }
 
   static Future<void> setLoginDetail(LoginResponseModel model) async {
@@ -34,11 +34,8 @@ class SharedService {
   }
 
   static Future<void> logout(BuildContext context) async {
-    await APICacheManager().deleteCache(KEY_NAME);
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      const HomePage() as String,
-      (route) => false,
-    );
+    APICacheManager().deleteCache(KEY_NAME);
+    Navigator.of(context).pop();
+    Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
   }
 }
