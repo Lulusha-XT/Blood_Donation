@@ -1,22 +1,22 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/common_widgets/circularProgressBar/circular_progress_widget.dart';
 import 'package:flutter_application_1/src/config/config.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
-import 'package:flutter_application_1/src/features/authentication/controllers/signup_controllers.dart';
-import 'package:flutter_application_1/src/features/core/models/user_model.dart';
+import 'package:flutter_application_1/src/features/authentication/controllers/blood_request_controller.dart';
+import 'package:flutter_application_1/src/features/core/models/blood_request_model.dart';
 import 'package:flutter_application_1/src/features/core/pages/dashboard_page/home_page.dart';
+import 'package:flutter_application_1/src/providers/providers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
-class BloodRequiestFormWidget extends StatelessWidget {
+class BloodRequiestFormWidget extends ConsumerWidget {
   const BloodRequiestFormWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final controllers = Get.put(SignUpControllers());
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controllers = Get.put(BloodRequestControllers());
     final formKey = GlobalKey<FormState>();
     return Form(
       key: formKey,
@@ -43,12 +43,12 @@ class BloodRequiestFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: cFormHeigth - 20),
           TextFormField(
-            controller: controllers.fullname,
+            controller: controllers.reason,
             decoration: const InputDecoration(
               label: Text(cReason),
               prefixIcon: Icon(Icons.abc_outlined),
             ),
-            validator: (value) => validate(value, cFullName),
+            validator: (value) => validate(value, cReason),
           ),
           const SizedBox(height: cFormHeigth - 20),
           // set the default value to 'A'
@@ -56,58 +56,57 @@ class BloodRequiestFormWidget extends StatelessWidget {
 // build the DropdownButtonFormField widget
           const SizedBox(height: cFormHeigth - 20),
           TextFormField(
-            controller: controllers.email,
+            controller: controllers.unitRequired,
             decoration: const InputDecoration(
               label: Text(cUnitRequired),
               prefixIcon: Icon(Icons.ac_unit),
             ),
-            validator: validateEmail,
+            validator: (value) => validate(value, cUnitRequired),
           ),
           const SizedBox(height: cFormHeigth - 20),
           TextFormField(
-            controller: controllers.phoneNo,
+            controller: controllers.deadLine,
             decoration: const InputDecoration(
               label: Text(cDeadLine),
               prefixIcon: Icon(Icons.dangerous),
             ),
-            validator: (value) => validate(value, cPhoneNumber),
+            validator: (value) => validate(value, cDeadLine),
           ),
           const SizedBox(height: cFormHeigth - 20),
           TextFormField(
-            controller: controllers.password,
+            controller: controllers.hospital,
             decoration: const InputDecoration(
               label: Text(cHospital),
               prefixIcon: Icon(Icons.local_hospital_outlined),
             ),
-            validator: (value) => validate(value, cPassword),
-            obscureText: controllers.hidePassword.value,
+            validator: (value) => validate(value, cHospital),
           ),
           const SizedBox(height: cFormHeigth - 20),
           TextFormField(
-            controller: controllers.password,
+            controller: controllers.personInCharge,
             decoration: const InputDecoration(
               label: Text(cPersonInCharge),
               prefixIcon: Icon(Icons.person),
             ),
-            validator: (value) => validate(value, cPassword),
+            validator: (value) => validate(value, cPersonInCharge),
           ),
           const SizedBox(height: cFormHeigth - 20),
           TextFormField(
-            controller: controllers.password,
+            controller: controllers.contactNumber,
             decoration: const InputDecoration(
               label: Text(cContactNumber),
               prefixIcon: Icon(Icons.contact_emergency),
             ),
-            validator: (value) => validate(value, cPassword),
+            validator: (value) => validate(value, cContactNumber),
           ),
           const SizedBox(height: cFormHeigth - 20),
           TextFormField(
-            controller: controllers.password,
+            controller: controllers.patientName,
             decoration: const InputDecoration(
               label: Text(cPatientName),
               prefixIcon: Icon(Icons.local_hospital),
             ),
-            validator: (value) => validate(value, cPassword),
+            validator: (value) => validate(value, cPatientName),
           ),
 
           const SizedBox(height: cFormHeigth - 10),
@@ -128,18 +127,26 @@ class BloodRequiestFormWidget extends StatelessWidget {
                         if (formKey.currentState!.validate()) {
                           // Show circular progress indicator while creating user
                           controllers.isAsyncCallProcess.value = true;
-                          final user = UserModel(
-                            email: controllers.email.text.trim(),
-                            password: controllers.password.text.trim(),
-                            fullName: controllers.fullname.text.trim(),
-                            phoneNo: controllers.phoneNo.text.trim(),
+                          final bloodRequest = BloodRequest(
                             bloodType: controllers.bloodType.text.trim(),
+                            reason: controllers.reason.text.trim(),
+                            unitRequired: double.parse(
+                                controllers.unitRequired.text.trim()),
+                            deadLine: controllers.deadLine.text.trim(),
+                            hospital: controllers.hospital.text.trim(),
+                            personInCharge:
+                                controllers.personInCharge.text.trim(),
+                            contactNumber:
+                                controllers.contactNumber.text.trim(),
+                            patientName: controllers.patientName.text.trim(),
                           );
 
                           // SignUpControllers.instance
                           //     .registerUser(user.email, user.password);
                           try {
-                            await SignUpControllers.instance.createUser(user)
+                            await ref
+                                    .watch(bloodRequestProvider.notifier)
+                                    .createBloodRequest(bloodRequest)
                                 ?
 
                                 // If the registration was successful
@@ -151,7 +158,7 @@ class BloodRequiestFormWidget extends StatelessWidget {
                                         title: const Text(Config.appName),
                                         content: const Text(
                                             "Blood requiest completed successfully"),
-                                        actions: <Widget>[
+                                        actions: [
                                           TextButton(
                                             child: const Text("Ok"),
                                             onPressed: () {
@@ -225,15 +232,6 @@ class BloodRequiestFormWidget extends StatelessWidget {
   String? validate(String? value, String inputName) {
     if (value!.isEmpty) {
       return "$inputName is required";
-    }
-    return null;
-  }
-
-  String? validateEmail(String? email) {
-    if (email == null || email.isEmpty) {
-      return 'Email is required';
-    } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
-      return 'Please enter a valid email';
     }
     return null;
   }

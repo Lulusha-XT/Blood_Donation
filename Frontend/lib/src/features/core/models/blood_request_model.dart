@@ -7,7 +7,7 @@ class BloodRequest {
   String personInCharge;
   String contactNumber;
   String patientName;
-  String userId;
+  String? userId;
   BloodRequest({
     required this.bloodType,
     required this.reason,
@@ -17,7 +17,7 @@ class BloodRequest {
     required this.personInCharge,
     required this.contactNumber,
     required this.patientName,
-    required this.userId,
+    this.userId,
   });
 
   factory BloodRequest.fromJson(Map<String, dynamic> json) {

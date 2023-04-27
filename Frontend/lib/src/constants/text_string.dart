@@ -74,4 +74,5 @@ const String cHospital = "Hospital";
 const String cPersonInCharge = "Person In Charge";
 const String cContactNumber = "Contact Number";
 const String cPatientName = "Patient Name";
+const String cUserId = "UserId";
 const String cRequest = "Request";

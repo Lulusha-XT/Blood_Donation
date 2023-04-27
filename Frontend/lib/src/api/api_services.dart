@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_application_1/src/config/config.dart';
 import 'package:flutter_application_1/src/features/authentication/models/login_response_model.dart';
 import 'package:flutter_application_1/src/features/authentication/models/user_model.dart';
+import 'package:flutter_application_1/src/features/core/models/blood_request_model.dart';
 import 'package:flutter_application_1/src/utils/shared_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -97,6 +98,73 @@ class ApiService {
         "phoneNo": user.phoneNo,
         "bloodType": user.bloodType,
       }),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    }
+    // else if (response.statusCode == 401) {
+    //   // navigatorKey.currentState
+    //   //     ?.pushNamedAndRemoveUntil("/login", (route) => false);
+    // }
+    else {
+      return false;
+    }
+  }
+
+  Future<bool> createBloodeRequest(BloodRequest bloodRequest) async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeader = {
+      "Content-Type": "application/json",
+      'Authorization': 'Basic ${loginDetails!.data.token.toString()}',
+    };
+    var url = Uri.http(Config.apiURL, Config.getBloodRequest);
+    var response = await client.post(url,
+        headers: requestHeader, body: jsonEncode(bloodRequest.toJson()));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<BloodRequest?> getBloodRequest() async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeader = {
+      "Content-Type": "application/json",
+      'Authorization': 'Basic ${loginDetails!.data.token.toString()}',
+    };
+
+    var url = Uri.http(
+      Config.apiURL,
+      "${Config.getBloodRequest}${loginDetails.data.userId.toString()}",
+    );
+
+    var response = await client.get(url, headers: requestHeader);
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      var data = jsonDecode(response.body);
+
+      BloodRequest bloodRequest = BloodRequest.fromJson(data["data"]);
+
+      return bloodRequest;
+    } else {
+      return null;
+    }
+  }
+
+  Future<bool> updateBloodRequest(BloodRequest user) async {
+    var lodingDetail = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ${lodingDetail?.data.token.toString()}'
+    };
+    var url = Uri.http(Config.apiURL, Config.updateUserById);
+    var response = await client.put(
+      url,
+      headers: requestHeaders,
+      //  body: jsonEncode(bloodR),
     );
     if (response.statusCode == 200) {
       return true;

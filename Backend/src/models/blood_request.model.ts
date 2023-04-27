@@ -39,9 +39,6 @@ const bloodRequestSchema = new Schema<IBloodRequestDocument>(
 );
 
 const BloodRequest: Model<IBloodRequestDocument> =
-  mongoose.model<IBloodRequestDocument>(
-    "BloodRequestSchema",
-    bloodRequestSchema
-  );
+  mongoose.model<IBloodRequestDocument>("BloodRequest", bloodRequestSchema);
 
 export { IBloodRequest, IBloodRequestDocument, BloodRequest };

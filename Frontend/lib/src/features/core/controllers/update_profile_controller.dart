@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/api/api_services.dart';
 import 'package:get/get.dart';
-
-import '../../authentication/models/user_model.dart';
 
 class UpdateProfileController extends GetxController {
   static UpdateProfileController get instance => Get.find();

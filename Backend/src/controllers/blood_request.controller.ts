@@ -2,9 +2,11 @@ import { Request, Response, Router } from "express";
 import { IBloodRequest, BloodRequest } from "../models/blood_request.model";
 import * as BloodRequestServie from "../services/blood_request.service";
 import { Pagination } from "../types/pagination.types";
+import { verifyToken } from "../middlewares/auth";
+import { IRequest } from "../interface/user.interface";
 
 const createBloodRequest = async (
-  req: Request,
+  req: IRequest,
   res: Response,
   next: Function
 ) => {
@@ -18,8 +20,9 @@ const createBloodRequest = async (
       personInCharge: req.body.personInCharge,
       contactNumber: req.body.contactNumber,
       patientName: req.body.patientName,
-      userId: req.body.userId,
+      userId: req.user!.userId,
     };
+    console.log(req.user!.userId);
     const newBloodRequest = await BloodRequestServie.createBloodRequest(
       bloodRequest
     );
@@ -34,6 +37,7 @@ const getAllBloodReques = async (
   next: Function
 ) => {
   try {
+    console.log("Excuted from ");
     const pagination: Pagination = {
       page: req.query.page?.toString(),
       pageSize: req.query.pageSize?.toString(),
@@ -50,7 +54,7 @@ const getAllBloodReques = async (
 
 const bloodRequest_routes = (router: Router) => {
   router.get("/:id", getAllBloodReques);
-  router.post("/:id", createBloodRequest);
+  router.post("/", verifyToken, createBloodRequest);
 };
 
 export default bloodRequest_routes;
