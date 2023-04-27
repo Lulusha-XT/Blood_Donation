@@ -14,7 +14,7 @@ const createBloodRequest = async (
     const bloodRequest: IBloodRequest = {
       bloodType: req.body.bloodType,
       reason: req.body.reason,
-      unitRequired: req.body.unitRequired,
+      unitRequired: parseFloat(req.body.unitRequired),
       deadLine: req.body.deadLine,
       hospital: req.body.hospital,
       personInCharge: req.body.personInCharge,
@@ -22,7 +22,7 @@ const createBloodRequest = async (
       patientName: req.body.patientName,
       userId: req.user!.userId,
     };
-    console.log(req.user!.userId);
+
     const newBloodRequest = await BloodRequestServie.createBloodRequest(
       bloodRequest
     );
@@ -53,7 +53,7 @@ const getAllBloodReques = async (
 };
 
 const bloodRequest_routes = (router: Router) => {
-  router.get("/:id", getAllBloodReques);
+  router.get("/", getAllBloodReques);
   router.post("/", verifyToken, createBloodRequest);
 };
 

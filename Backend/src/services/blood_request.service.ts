@@ -1,8 +1,8 @@
 import MONGO_DB_CONFIG from "../config/database";
 import {
+  BloodRequest,
   IBloodRequest,
   IBloodRequestDocument,
-  BloodRequest,
 } from "../models/blood_request.model";
 import { Pagination } from "../types/pagination.types";
 
@@ -11,7 +11,7 @@ export const createBloodRequest = async (
 ): Promise<IBloodRequestDocument> => {
   try {
     const newBloodRequest = new BloodRequest({
-      bloodRequest,
+      ...bloodRequest,
     });
     newBloodRequest.save();
     return newBloodRequest as IBloodRequestDocument;
