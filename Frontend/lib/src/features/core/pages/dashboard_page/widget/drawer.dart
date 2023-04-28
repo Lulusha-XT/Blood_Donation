@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
+import 'package:flutter_application_1/src/utils/shared_service.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer(
@@ -42,65 +43,65 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            selected: selectedIndex == 1,
+            selected: selectedIndex == 2,
             selectedColor: cPrimaryColor,
             leading: const Icon(Icons.local_hospital),
             title: const Text(cBloodRequest),
             onTap: () {
-              onItemTapped(1);
-            },
-          ),
-          ListTile(
-            selected: selectedIndex == 2,
-            selectedColor: cPrimaryColor,
-            leading: const Icon(Icons.accessibility_new),
-            title: const Text(cDonateBlood),
-            onTap: () {
-              onItemTapped(8);
-            },
-          ),
-          ListTile(
-            selected: selectedIndex == 6,
-            selectedColor: cPrimaryColor,
-            leading: const Icon(Icons.history),
-            title: const Text(cMyRequest),
-            onTap: () {
-              onItemTapped(7);
-            },
-          ),
-          ListTile(
-            selected: selectedIndex == 4,
-            selectedColor: cPrimaryColor,
-            leading: const Icon(Icons.favorite),
-            title: const Text(cDonation),
-            onTap: () {
-              onItemTapped(4);
+              onItemTapped(2);
             },
           ),
           ListTile(
             selected: selectedIndex == 3,
             selectedColor: cPrimaryColor,
-            leading: const Icon(Icons.location_on),
-            title: const Text(cNearby),
+            leading: const Icon(Icons.accessibility_new),
+            title: const Text(cDonateBlood),
             onTap: () {
               onItemTapped(3);
             },
           ),
           ListTile(
+            selected: selectedIndex == 4,
+            selectedColor: cPrimaryColor,
+            leading: const Icon(Icons.history),
+            title: const Text(cMyRequest),
+            onTap: () {
+              onItemTapped(4);
+            },
+          ),
+          ListTile(
             selected: selectedIndex == 5,
+            selectedColor: cPrimaryColor,
+            leading: const Icon(Icons.favorite),
+            title: const Text(cDonation),
+            onTap: () {
+              onItemTapped(5);
+            },
+          ),
+          ListTile(
+            selected: selectedIndex == 6,
+            selectedColor: cPrimaryColor,
+            leading: const Icon(Icons.location_on),
+            title: const Text(cNearby),
+            onTap: () {
+              onItemTapped(6);
+            },
+          ),
+          ListTile(
+            selected: selectedIndex == 7,
             selectedColor: cPrimaryColor,
             leading: const Icon(Icons.message),
             title: const Text(cMessage),
             onTap: () {
-              onItemTapped(5);
+              onItemTapped(7);
             },
           ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text(cLogout),
-            onTap: () {
-              // Add your logout logic here
+            onTap: () async {
+              await SharedService.logout(context);
             },
           ),
         ],

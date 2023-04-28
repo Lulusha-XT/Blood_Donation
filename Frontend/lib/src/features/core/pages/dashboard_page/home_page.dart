@@ -3,7 +3,7 @@ import 'package:flutter_application_1/src/features/core/pages/blood_request/bloo
 import 'package:flutter_application_1/src/features/core/pages/home_page/blood_request.dart';
 import 'package:flutter_application_1/src/features/core/pages/dashboard_page/widget/appbar.widget.dart';
 import 'package:flutter_application_1/src/features/core/pages/dashboard_page/widget/drawer.dart';
-import 'package:flutter_application_1/src/features/core/pages/my_request_page/my_request_page.dart';
+import 'package:flutter_application_1/src/features/core/pages/donate_blood_page/donate_blood_page.dart';
 import 'package:flutter_application_1/src/features/core/pages/profile/profile_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,12 +20,11 @@ class _HomePageState extends State<HomePage> {
     const BloodPage(),
     const ProfilePage(),
     const BloodRequestPage(),
-    const Text('Nearby'),
+    const DonateBloodPage(),
+    const Text("My Request"),
     const Text('Donation'),
+    const Text('Nearby'),
     const Text('Message'),
-    const Text('Message'),
-    const MyRequestsPage(),
-    const Text("Donate blood")
   ];
 
   void _onItemTapped(int index) {

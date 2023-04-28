@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/features/core/pages/my_request_page/widget/request_card_widget.dart';
+import 'package:flutter_application_1/src/features/core/pages/donate_blood_page/widget/request_card_widget.dart';
 import 'package:flutter_application_1/src/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyRequestsPage extends ConsumerWidget {
-  const MyRequestsPage({super.key});
+class DonateBloodPage extends ConsumerWidget {
+  const DonateBloodPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
