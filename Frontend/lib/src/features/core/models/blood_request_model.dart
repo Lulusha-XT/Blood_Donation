@@ -1,10 +1,13 @@
+List<BloodRequest> bloodRequestFromJson(dynamic str) =>
+    List<BloodRequest>.from((str).map((x) => BloodRequest.fromJson(x)));
+
 class BloodRequest {
   String bloodType;
   String reason;
   double unitRequired;
   String deadLine;
   String hospital;
-  String personInCharge;
+  String? personInCharge;
   String contactNumber;
   String patientName;
   String? userId;
@@ -14,7 +17,7 @@ class BloodRequest {
     required this.unitRequired,
     required this.deadLine,
     required this.hospital,
-    required this.personInCharge,
+    this.personInCharge,
     required this.contactNumber,
     required this.patientName,
     this.userId,

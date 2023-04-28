@@ -22,6 +22,7 @@ const bloodRequestSchema = new Schema<IBloodRequestDocument>(
     unitRequired: { type: Number, required: true },
     deadLine: { type: String, required: true },
     hospital: { type: String, required: true },
+    personInCharge: { type: String },
     contactNumber: { type: String },
     patientName: { type: String },
     userId: { type: String },

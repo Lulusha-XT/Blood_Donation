@@ -1,25 +1,51 @@
 import 'package:flutter_application_1/src/features/core/models/blood_request_model.dart';
 
 class BloodRequestState {
+  List<BloodRequest> bloodRequests;
+  final bool hasNext;
+  final bool isLoading;
+
   BloodRequestState({
-    this.bloodRequest,
-    this.isLoading = false,
-    this.isHidePassword = true,
+    required this.bloodRequests,
+    required this.hasNext,
+    required this.isLoading,
   });
 
-  BloodRequest? bloodRequest;
-  bool isLoading;
-  bool isHidePassword;
+  factory BloodRequestState.initial() {
+    return BloodRequestState(
+      bloodRequests: <BloodRequest>[],
+      hasNext: true,
+      isLoading: false,
+    );
+  }
 
   BloodRequestState copyWith({
-    BloodRequest? bloodRequest,
+    List<BloodRequest>? bloodRequests,
+    bool? hasNext,
     bool? isLoading,
-    bool? isHidePassword,
   }) {
     return BloodRequestState(
-      bloodRequest: bloodRequest ?? this.bloodRequest,
+      bloodRequests: bloodRequests ?? this.bloodRequests,
+      hasNext: hasNext ?? this.hasNext,
       isLoading: isLoading ?? this.isLoading,
-      isHidePassword: isHidePassword ?? this.isHidePassword,
     );
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BloodRequestState &&
+          runtimeType == other.runtimeType &&
+          bloodRequests == other.bloodRequests &&
+          hasNext == other.hasNext &&
+          isLoading == other.isLoading;
+
+  @override
+  int get hashCode =>
+      bloodRequests.hashCode ^ hasNext.hashCode ^ isLoading.hashCode;
+
+  @override
+  String toString() {
+    return 'BloodRequestState{BloodRequests: $bloodRequests, hasNext: $hasNext, isLoading: $isLoading}';
   }
 }
