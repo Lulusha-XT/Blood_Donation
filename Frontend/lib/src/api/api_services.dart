@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/src/config/config.dart';
 import 'package:flutter_application_1/src/features/authentication/models/login_response_model.dart';
 import 'package:flutter_application_1/src/features/authentication/models/user_model.dart';
@@ -101,12 +102,11 @@ class ApiService {
     );
     if (response.statusCode == 200) {
       return true;
-    }
-    // else if (response.statusCode == 401) {
-    //   // navigatorKey.currentState
-    //   //     ?.pushNamedAndRemoveUntil("/login", (route) => false);
-    // }
-    else {
+    } else if (response.statusCode == 401) {
+      navigatorKey.currentState
+          ?.pushNamedAndRemoveUntil("/login", (route) => false);
+      return false;
+    } else {
       return false;
     }
   }
@@ -128,7 +128,7 @@ class ApiService {
     }
   }
 
-  Future<BloodRequest?> getBloodRequest() async {
+  Future<List<BloodRequest>?> getBloodRequest() async {
     var loginDetails = await SharedService.loginDetails();
     Map<String, String> requestHeader = {
       "Content-Type": "application/json",
@@ -145,10 +145,7 @@ class ApiService {
     if (response.statusCode == 200) {
       print(response.body);
       var data = jsonDecode(response.body);
-
-      BloodRequest bloodRequest = BloodRequest.fromJson(data["data"]);
-
-      return bloodRequest;
+      return bloodRequestFromJson(data["data"]);
     } else {
       return null;
     }
@@ -168,12 +165,11 @@ class ApiService {
     );
     if (response.statusCode == 200) {
       return true;
-    }
-    // else if (response.statusCode == 401) {
-    //   // navigatorKey.currentState
-    //   //     ?.pushNamedAndRemoveUntil("/login", (route) => false);
-    // }
-    else {
+    } else if (response.statusCode == 401) {
+      navigatorKey.currentState
+          ?.pushNamedAndRemoveUntil("/login", (route) => false);
+      return false;
+    } else {
       return false;
     }
   }

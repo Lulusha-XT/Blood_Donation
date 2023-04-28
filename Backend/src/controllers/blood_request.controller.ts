@@ -37,7 +37,6 @@ const getAllBloodReques = async (
   next: Function
 ) => {
   try {
-    console.log("Excuted from ");
     const pagination: Pagination = {
       page: req.query.page?.toString(),
       pageSize: req.query.pageSize?.toString(),
@@ -53,7 +52,7 @@ const getAllBloodReques = async (
 };
 
 const bloodRequest_routes = (router: Router) => {
-  router.get("/", getAllBloodReques);
+  router.get("/:id", getAllBloodReques);
   router.post("/", verifyToken, createBloodRequest);
 };
 
