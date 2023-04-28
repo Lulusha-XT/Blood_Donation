@@ -140,9 +140,6 @@ class BloodRequiestFormWidget extends ConsumerWidget {
                                 controllers.contactNumber.text.trim(),
                             patientName: controllers.patientName.text.trim(),
                           );
-
-                          // SignUpControllers.instance
-                          //     .registerUser(user.email, user.password);
                           try {
                             await ref
                                     .watch(bloodRequestProvider.notifier)
@@ -183,8 +180,8 @@ class BloodRequiestFormWidget extends ConsumerWidget {
                                       return AlertDialog(
                                         title: const Text(Config.appName),
                                         content: const Text(
-                                            "This email is already registered"),
-                                        actions: <Widget>[
+                                            "Blood requiest not completed "),
+                                        actions: [
                                           TextButton(
                                             child: const Text("Ok"),
                                             onPressed: () {
@@ -204,7 +201,7 @@ class BloodRequiestFormWidget extends ConsumerWidget {
                                   title: const Text(Config.appName),
                                   content: Text(
                                       "An error occurred: ${e.toString()}"),
-                                  actions: <Widget>[
+                                  actions: [
                                     TextButton(
                                       child: const Text("Ok"),
                                       onPressed: () {
