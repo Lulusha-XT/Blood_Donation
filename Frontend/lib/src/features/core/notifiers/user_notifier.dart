@@ -9,7 +9,7 @@ class UserNotifier extends StateNotifier<UserModel> {
   Future<void> getUser() async {
     final user = await _apiService.getUsersData();
     state = user!;
-    print("user ${user}");
+    print("user $user");
   }
 
   Future<bool> updateUserInfo(UserModel user) async {

@@ -51,12 +51,12 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            selected: selectedIndex == 3,
+            selected: selectedIndex == 6,
             selectedColor: cPrimaryColor,
-            leading: const Icon(Icons.location_on),
-            title: const Text(cNearby),
+            leading: const Icon(Icons.history),
+            title: const Text(cMyRequest),
             onTap: () {
-              onItemTapped(3);
+              onItemTapped(7);
             },
           ),
           ListTile(
@@ -66,6 +66,15 @@ class MyDrawer extends StatelessWidget {
             title: const Text(cDonation),
             onTap: () {
               onItemTapped(4);
+            },
+          ),
+          ListTile(
+            selected: selectedIndex == 3,
+            selectedColor: cPrimaryColor,
+            leading: const Icon(Icons.location_on),
+            title: const Text(cNearby),
+            onTap: () {
+              onItemTapped(3);
             },
           ),
           ListTile(

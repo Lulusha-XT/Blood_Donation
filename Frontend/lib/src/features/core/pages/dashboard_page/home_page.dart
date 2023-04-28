@@ -22,6 +22,8 @@ class _HomePageState extends State<HomePage> {
     const Text('Nearby'),
     const Text('Donation'),
     const Text('Message'),
+    const Text('Message'),
+    const Text('My Requests'),
   ];
 
   void _onItemTapped(int index) {

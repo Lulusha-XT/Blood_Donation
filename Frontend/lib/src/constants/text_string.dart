@@ -60,11 +60,12 @@ const String cForgetPhoneSubTitle =
 // --Dash board
 const String cHome = "Home";
 const String cProfile = "Profile";
-const String cBloodRequest = "Blood Request";
+const String cBloodRequest = "Request Blood";
 const String cNearby = "Nearby";
-const String cDonation = "Donation";
-const String cMessage = "Message";
+const String cDonation = "Donations";
+const String cMessage = "Messages";
 const String cLogout = "Logout";
+const String cMyRequest = "My Requests";
 
 // --Blood Request Page
 const String cReason = "Reason";
