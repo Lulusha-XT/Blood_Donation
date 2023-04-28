@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/api/api_services.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/features/core/models/blood_request_model.dart';
 
@@ -114,15 +115,26 @@ class RequestListWidget extends StatelessWidget {
                         width: 150,
                         margin: const EdgeInsets.all(6.0),
                         decoration: BoxDecoration(
-                          color: cPrimaryColor,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: const Center(
-                          child: Text(
-                            'Donate Now',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                        child: Material(
+                          color:
+                              cPrimaryColor, // set a different background color here
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: InkWell(
+                            onTap: () async {
+                              final ApiService apiService = ApiService();
+                              await apiService.donateNow(bloodRequest.userId!,
+                                  bloodRequest.requestId!);
+                            },
+                            child: const Center(
+                              child: Text(
+                                'Donate Now',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 19,
+                                ),
+                              ),
                             ),
                           ),
                         ),

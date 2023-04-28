@@ -2,6 +2,7 @@ List<BloodRequest> bloodRequestFromJson(dynamic str) =>
     List<BloodRequest>.from((str).map((x) => BloodRequest.fromJson(x)));
 
 class BloodRequest {
+  String? requestId;
   String bloodType;
   String reason;
   double unitRequired;
@@ -12,6 +13,7 @@ class BloodRequest {
   String patientName;
   String? userId;
   BloodRequest({
+    this.requestId,
     required this.bloodType,
     required this.reason,
     required this.unitRequired,
@@ -25,6 +27,7 @@ class BloodRequest {
 
   factory BloodRequest.fromJson(Map<String, dynamic> json) {
     return BloodRequest(
+      requestId: json["requestId"],
       bloodType: json["bloodType"],
       reason: json["reason"],
       unitRequired: json["unitRequired"],
@@ -38,6 +41,7 @@ class BloodRequest {
   }
   Map<String, dynamic> toJson() {
     return {
+      "requestId": requestId,
       "bloodType": bloodType,
       "reason": reason,
       "unitRequired": unitRequired,

@@ -177,4 +177,33 @@ class ApiService {
       return false;
     }
   }
+
+  Future<bool> donateNow(String requesterId, String bloodRequestId) async {
+    var lodingDetail = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ${lodingDetail?.data.token.toString()}'
+    };
+    var url = Uri.http(Config.apiURL, Config.donateNow);
+
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode({
+        "acceptor": requesterId,
+        "requestId": bloodRequestId,
+        "donor": lodingDetail?.data.userId,
+      }),
+    );
+    if (response.statusCode == 200) {
+      print("true");
+      return true;
+    } else if (response.statusCode == 401) {
+      navigatorKey.currentState
+          ?.pushNamedAndRemoveUntil("/login", (route) => false);
+      return false;
+    } else {
+      return false;
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { IBloodRequest, BloodRequest } from "../models/blood_request.model";
+import { IBloodRequest } from "../models/blood_request.model";
 import * as BloodRequestServie from "../services/blood_request.service";
 import { Pagination } from "../types/pagination.types";
 import { verifyToken } from "../middlewares/auth";
