@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
     const Text('Message'),
     const Text('Message'),
     const MyRequestsPage(),
+    const Text("Donate blood")
   ];
 
   void _onItemTapped(int index) {
