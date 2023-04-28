@@ -3,6 +3,7 @@ import 'package:flutter_application_1/src/features/core/pages/blood_request/bloo
 import 'package:flutter_application_1/src/features/core/pages/home_page/blood_request.dart';
 import 'package:flutter_application_1/src/features/core/pages/dashboard_page/widget/appbar.widget.dart';
 import 'package:flutter_application_1/src/features/core/pages/dashboard_page/widget/drawer.dart';
+import 'package:flutter_application_1/src/features/core/pages/my_request_page/my_request_page.dart';
 import 'package:flutter_application_1/src/features/core/pages/profile/profile_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     const Text('Donation'),
     const Text('Message'),
     const Text('Message'),
-    const Text('My Requests'),
+    const MyRequestsPage(),
   ];
 
   void _onItemTapped(int index) {
