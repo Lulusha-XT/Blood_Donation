@@ -62,10 +62,11 @@ const String cHome = "Home";
 const String cProfile = "Profile";
 const String cBloodRequest = "Request Blood";
 const String cNearby = "Nearby";
-const String cDonation = "Donations";
+const String cDonation = "My Donations";
 const String cMessage = "Messages";
 const String cLogout = "Logout";
 const String cMyRequest = "My Requests";
+const String cDonateBlood = "Donate blood";
 
 // --Blood Request Page
 const String cReason = "Reason";

@@ -42,12 +42,21 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            selected: selectedIndex == 2,
+            selected: selectedIndex == 1,
             selectedColor: cPrimaryColor,
             leading: const Icon(Icons.local_hospital),
             title: const Text(cBloodRequest),
             onTap: () {
-              onItemTapped(2);
+              onItemTapped(1);
+            },
+          ),
+          ListTile(
+            selected: selectedIndex == 2,
+            selectedColor: cPrimaryColor,
+            leading: const Icon(Icons.accessibility_new),
+            title: const Text(cDonateBlood),
+            onTap: () {
+              onItemTapped(8);
             },
           ),
           ListTile(
