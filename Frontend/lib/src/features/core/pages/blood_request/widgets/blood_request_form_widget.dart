@@ -1,18 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/common_widgets/circularProgressBar/circular_progress_widget.dart';
-import 'package:flutter_application_1/src/config/config.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
 import 'package:flutter_application_1/src/features/authentication/controllers/blood_request_controller.dart';
 import 'package:flutter_application_1/src/features/core/models/blood_request_model.dart';
-import 'package:flutter_application_1/src/features/core/pages/dashboard_page/home_page.dart';
 import 'package:flutter_application_1/src/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 class BloodRequiestFormWidget extends ConsumerWidget {
-  const BloodRequiestFormWidget({super.key});
+  const BloodRequiestFormWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -111,115 +110,81 @@ class BloodRequiestFormWidget extends ConsumerWidget {
 
           const SizedBox(height: cFormHeigth - 10),
 
-          Obx(
-            () => controllers.isAsyncCallProcess.value
-                ? const Center(
-                    child: DottedCircularProgressIndicatorFb(
-                      currentDotColor: cSecondaryColor,
-                      defaultDotColor: cPrimaryColor,
-                      numDots: 8,
-                    ),
-                  )
-                : SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          // Show circular progress indicator while creating user
-                          controllers.isAsyncCallProcess.value = true;
-                          final bloodRequest = BloodRequest(
-                            bloodType: controllers.bloodType.text.trim(),
-                            reason: controllers.reason.text.trim(),
-                            unitRequired: double.parse(
-                                controllers.unitRequired.text.trim()),
-                            deadLine: controllers.deadLine.text.trim(),
-                            hospital: controllers.hospital.text.trim(),
-                            personInCharge:
-                                controllers.personInCharge.text.trim(),
-                            contactNumber:
-                                controllers.contactNumber.text.trim(),
-                            patientName: controllers.patientName.text.trim(),
-                          );
-                          try {
-                            await ref
-                                    .watch(bloodRequestProvider.notifier)
-                                    .createBloodRequest(bloodRequest)
-                                ?
+          Consumer(
+            builder: (context, ref, _) {
+              final notifier = ref.read(bloodRequestProvider.notifier);
+              final state = ref.watch(bloodRequestProvider);
+              return state.isLoading
+                  ? const Center(
+                      child: DottedCircularProgressIndicatorFb(
+                        currentDotColor: cSecondaryColor,
+                        defaultDotColor: cPrimaryColor,
+                        numDots: 8,
+                      ),
+                    )
+                  : SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (formKey.currentState!.validate()) {
+                            // Show circular progress indicator while creating user
+                            // notifier.start();
 
-                                // If the registration was successful
-
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const Text(Config.appName),
-                                        content: const Text(
-                                            "Blood requiest completed successfully"),
-                                        actions: [
-                                          TextButton(
-                                            child: const Text("Ok"),
-                                            onPressed: () {
-                                              // Navigator.of(context).pop();
-                                              // Navigator.of(context)
-                                              //     .pushNamedAndRemoveUntil(
-                                              //   "/login",
-                                              //   (route) => false,
-                                              // );
-                                              Get.to(() => const HomePage());
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  )
-
-                                // If the email is already registered
-                                : showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const Text(Config.appName),
-                                        content: const Text(
-                                            "Blood requiest not completed "),
-                                        actions: [
-                                          TextButton(
-                                            child: const Text("Ok"),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                          } catch (e) {
-                            // If there was an error during the registration process
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text(Config.appName),
-                                  content: Text(
-                                      "An error occurred: ${e.toString()}"),
-                                  actions: [
-                                    TextButton(
-                                      child: const Text("Ok"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
+                            final bloodRequest = BloodRequest(
+                              bloodType: controllers.bloodType.text.trim(),
+                              reason: controllers.reason.text.trim(),
+                              unitRequired: double.parse(
+                                controllers.unitRequired.text.trim(),
+                              ),
+                              deadLine: controllers.deadLine.text.trim(),
+                              hospital: controllers.hospital.text.trim(),
+                              personInCharge:
+                                  controllers.personInCharge.text.trim(),
+                              contactNumber:
+                                  controllers.contactNumber.text.trim(),
+                              patientName: controllers.patientName.text.trim(),
                             );
-                          }
+                            try {
+                              final success = await notifier
+                                  .createBloodRequest(bloodRequest);
 
-                          //   Get.to(() => const OTPScrenn());
-                        }
-                      },
-                      child: Text(cRequest.toUpperCase()),
-                    ),
-                  ),
+                              if (success) {
+                                // Show success message
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    backgroundColor: Colors.green,
+                                    content: Text(
+                                        "Blood request created successfully"),
+                                  ),
+                                );
+                              } else {
+                                // Show error message
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    backgroundColor: Colors.red,
+                                    content:
+                                        Text("Error creating blood request"),
+                                  ),
+                                );
+                              }
+                            } catch (e) {
+                              if (kDebugMode) {
+                                print(e);
+                              }
+                              // Show error message
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text("Error creating blood request"),
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        child: const Text("Create Blood Request"),
+                      ),
+                    );
+            },
           ),
         ],
       ),

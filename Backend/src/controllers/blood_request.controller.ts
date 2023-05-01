@@ -14,7 +14,7 @@ const createBloodRequest = async (
     const bloodRequest: IBloodRequest = {
       bloodType: req.body.bloodType,
       reason: req.body.reason,
-      unitRequired: parseFloat(req.body.unitRequired),
+      unitRequired: req.body.unitRequired,
       deadLine: req.body.deadLine,
       hospital: req.body.hospital,
       personInCharge: req.body.personInCharge,

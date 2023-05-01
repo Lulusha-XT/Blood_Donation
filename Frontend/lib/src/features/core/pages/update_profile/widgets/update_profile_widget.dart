@@ -120,7 +120,7 @@ class UpdateProfileWidget extends ConsumerWidget {
                           //     .registerUser(user.email, user.password);
                           try {
                             await ref
-                                    .watch(userProvider.notifier)
+                                    .read(userProvider.notifier)
                                     .updateUserInfo(user)
                                 ?
 

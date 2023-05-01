@@ -3,7 +3,7 @@ import 'package:flutter_application_1/src/features/core/models/blood_request_mod
 class BloodRequestState {
   List<BloodRequest> bloodRequests;
   final bool hasNext;
-  final bool isLoading;
+  bool isLoading;
 
   BloodRequestState({
     required this.bloodRequests,

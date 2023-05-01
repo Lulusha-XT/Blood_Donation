@@ -10,8 +10,12 @@ class BloodRequestNotifier extends StateNotifier<BloodRequestState> {
   final ApiService _apiService;
   int _page = 1;
 
-  Future<bool> createBloodRequest(BloodRequest bloodRequest) async {
+  Future<bool> createBloodRequest(
+    BloodRequest bloodRequest,
+  ) async {
+    state = state.copyWith(isLoading: true);
     final result = await _apiService.createBloodeRequest(bloodRequest);
+    state = state.copyWith(isLoading: false);
     return result;
   }
 
@@ -31,11 +35,14 @@ class BloodRequestNotifier extends StateNotifier<BloodRequestState> {
     if (bloodRequest.length % 10 != 0 || bloodRequest.isEmpty) {
       state = state.copyWith(hasNext: false);
     }
-    Future.delayed(const Duration(microseconds: 1500), () {
-      state = state.copyWith(bloodRequests: newbloodRequest);
-      _page++;
-      state = state.copyWith(isLoading: false);
-    });
+    Future.delayed(
+      const Duration(microseconds: 1500),
+      () {
+        state = state.copyWith(bloodRequests: newbloodRequest);
+        _page++;
+      },
+    );
+    state = state.copyWith(isLoading: false);
   }
 
   Future<bool> updateBloodRequest(BloodRequest bloodRequest) async {
@@ -47,4 +54,7 @@ class BloodRequestNotifier extends StateNotifier<BloodRequestState> {
     }
     return false;
   }
+
+  void start() => state.isLoading = true;
+  void end() => state.isLoading = false;
 }

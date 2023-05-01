@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/src/config/config.dart';
 import 'package:flutter_application_1/src/features/authentication/models/login_response_model.dart';
 import 'package:flutter_application_1/src/features/authentication/models/user_model.dart';
 import 'package:flutter_application_1/src/features/core/models/blood_request_model.dart';
+import 'package:flutter_application_1/src/features/core/models/my_request_model.dart';
 import 'package:flutter_application_1/src/utils/shared_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -83,6 +85,26 @@ class ApiService {
     }
   }
 
+  Future<List<MyRequest>?> getMyRequest() async {
+    var loginDatails = await SharedService.loginDetails();
+    Map<String, String> requestHeader = {
+      "Content-Type": "application/json",
+      'Authorization': 'Basic ${loginDatails!.data.token.toString()}',
+    };
+
+    var url = Uri.http(Config.apiURL,
+        "${Config.getBloodRequest}${loginDatails.data.userId.toString()}");
+
+    var response = await client.get(url, headers: requestHeader);
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      return myRequestFromJson(data["data"]);
+    } else {
+      return null;
+    }
+  }
+
   Future<bool> updtaProfile(UserModel user) async {
     var lodingDetail = await SharedService.loginDetails();
     Map<String, String> requestHeaders = {
@@ -147,7 +169,9 @@ class ApiService {
     var response = await client.get(url, headers: requestHeader);
 
     if (response.statusCode == 200) {
-      print(response.body);
+      if (kDebugMode) {
+        print(response.body);
+      }
       var data = jsonDecode(response.body);
       return bloodRequestFromJson(data["data"]);
     } else {

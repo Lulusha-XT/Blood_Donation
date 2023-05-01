@@ -4,6 +4,7 @@ import 'package:flutter_application_1/src/features/core/pages/home_page/blood_re
 import 'package:flutter_application_1/src/features/core/pages/dashboard_page/widget/appbar.widget.dart';
 import 'package:flutter_application_1/src/features/core/pages/dashboard_page/widget/drawer.dart';
 import 'package:flutter_application_1/src/features/core/pages/donate_blood_page/donate_blood_page.dart';
+import 'package:flutter_application_1/src/features/core/pages/my_request_page/my_request_page.dart';
 import 'package:flutter_application_1/src/features/core/pages/profile/profile_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     const ProfilePage(),
     const BloodRequestPage(),
     const DonateBloodPage(),
-    const Text("My Request"),
+    const MyRequestPage(),
     const Text('Donation'),
     const Text('Nearby'),
     const Text('Message'),
