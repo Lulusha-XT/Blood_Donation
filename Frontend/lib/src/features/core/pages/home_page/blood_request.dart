@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/features/core/pages/home_page/widgets/carousel_slider_widget.dart';
+import 'package:flutter_application_1/src/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final locationProvider = StateProvider<String>((ref) => 'Location');
-final bloodTypeProvider = StateProvider<String>((ref) => 'Blood Type');
+// final locationProvider = StateProvider<String>((ref) => 'Location');
+// final bloodTypeProvider = StateProvider<String>((ref) => 'Blood Type');
 
 class BloodPage extends StatelessWidget {
   const BloodPage({super.key});
@@ -41,8 +42,7 @@ class BloodPage extends StatelessWidget {
   Widget _buildBloodType(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
-        final location = ref.watch(locationProvider.notifier).state;
-        final bloodType = ref.watch(bloodTypeProvider.notifier).state;
+        final bloodState = ref.watch(bloodFilterStateProvider);
         return Padding(
           padding: const EdgeInsets.all(5.0),
           child: SizedBox(
@@ -52,7 +52,7 @@ class BloodPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: DropdownButtonFormField<String>(
-                    value: location,
+                    value: bloodState.location,
                     decoration: const InputDecoration(
                       labelText: 'Location',
                       border: OutlineInputBorder(
@@ -62,8 +62,9 @@ class BloodPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onChanged: (value) =>
-                        ref.read(bloodTypeProvider.notifier).state = value!,
+                    onChanged: (value) => ref
+                        .read(bloodFilterStateProvider.notifier)
+                        .setLocation(value!),
                     items: [
                       'Location',
                       'Kombolcha',
@@ -81,13 +82,14 @@ class BloodPage extends StatelessWidget {
                     width: 20), // Add some spacing between the dropdowns
                 Expanded(
                   child: DropdownButtonFormField<String>(
-                    value: bloodType,
+                    value: bloodState.bloodType,
                     decoration: const InputDecoration(
                       labelText: 'Blood Type',
                       border: OutlineInputBorder(),
                     ),
-                    onChanged: (value) =>
-                        ref.read(bloodTypeProvider.notifier).state = value!,
+                    onChanged: (value) => ref
+                        .read(bloodFilterStateProvider.notifier)
+                        .setBloodType(value!),
                     items: [
                       'Blood Type',
                       'A+',

@@ -54,7 +54,4 @@ class BloodRequestNotifier extends StateNotifier<BloodRequestState> {
     }
     return false;
   }
-
-  void start() => state.isLoading = true;
-  void end() => state.isLoading = false;
 }
