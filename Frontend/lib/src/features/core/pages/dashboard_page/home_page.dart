@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/features/core/pages/blood_request/blood_requiest_page.dart';
+import 'package:flutter_application_1/src/features/core/pages/chat_screen/chat_screen.dart';
 import 'package:flutter_application_1/src/features/core/pages/home_page/blood_request.dart';
 import 'package:flutter_application_1/src/features/core/pages/dashboard_page/widget/appbar.widget.dart';
 import 'package:flutter_application_1/src/features/core/pages/dashboard_page/widget/drawer.dart';
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     const MyRequestPage(),
     const Text('Donation'),
     const Text('Nearby'),
-    const Text('Message'),
+    const ChatScreen(),
   ];
 
   void _onItemTapped(int index) {

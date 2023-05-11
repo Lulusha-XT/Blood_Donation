@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/features/authentication/pages/signin_page/signin_screen.dart';
 import 'package:flutter_application_1/src/features/authentication/pages/signup_page/signup_screen.dart';
+import 'package:flutter_application_1/src/features/core/pages/chat_screen/chat_screen.dart';
 import 'package:flutter_application_1/src/features/core/pages/dashboard_page/home_page.dart';
 import 'package:flutter_application_1/src/features/core/pages/profile/profile_page.dart';
 import 'package:flutter_application_1/src/features/core/pages/update_profile/updat_profile_page.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const SigninPage(),
         '/profile': (context) => const ProfilePage(),
         '/profile-update': (context) => const UpdateProfilePage(),
+        '/message': (context) => const ChatScreen(),
       },
     );
   }

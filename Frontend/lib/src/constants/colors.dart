@@ -14,3 +14,8 @@ const cDarkColor = Color(0XFF000000);
 const cOnBoardingPage1Color = Colors.white;
 const cOnBoardingPage2Color = Color(0xffffdcbd);
 const cOnBoardingPage3Color = Color(0xFFFFCDD2);
+
+class AppColors {
+  static Color purple = const Color(0xFF6c5ce7);
+  static Color black = const Color(0xFF191919);
+}
