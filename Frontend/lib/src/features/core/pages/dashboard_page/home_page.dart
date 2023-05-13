@@ -9,7 +9,6 @@ import 'package:flutter_application_1/src/features/core/pages/my_request_page/my
 import 'package:flutter_application_1/src/features/core/pages/nearby_page/nearby_page.dart';
 import 'package:flutter_application_1/src/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -30,22 +29,10 @@ class _HomePageState extends ConsumerState<HomePage> {
     const NearbyPage(),
     ChatScreen(),
   ];
-  void launchUrl() async {
-    const url =
-        "https://www.google.co.uk/maps/place/Student's+Clinic/@11.0495425,39.7474534,417m/data=!3m1!1e3!4m6!3m5!1s0x16479dc587f46b15:0x77cf17af4bfa91a0!8m2!3d11.0499626!4d39.7477662!16s%2Fg%2F11dxhzqrzf";
-    if (await launch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      if (_selectedIndex == 5) {
-        launchUrl();
-      }
     });
     Navigator.of(context).pop();
   }

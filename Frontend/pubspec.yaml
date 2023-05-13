@@ -48,6 +48,7 @@ dependencies:
   dots_indicator: ^2.1.0
   socket_io_client: ^2.0.2
   url_launcher: ^6.1.11
+  location:
 
 dev_dependencies:
   flutter_test:
