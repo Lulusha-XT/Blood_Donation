@@ -36,3 +36,11 @@ export const getAllBloodRequest = async (
     throw new Error(`Request not found ${error}`);
   }
 };
+export const getBloodRequestById = async (userId: string) => {
+  try {
+    const user = await BloodRequest.find({ userId: userId });
+    return user as unknown as IBloodRequestDocument[];
+  } catch (error) {
+    throw new Error(`Request not found ${error}`);
+  }
+};

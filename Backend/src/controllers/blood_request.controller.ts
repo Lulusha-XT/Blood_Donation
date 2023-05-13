@@ -51,8 +51,24 @@ const getAllBloodReques = async (
   }
 };
 
+const getBloodRequestById = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
+  try {
+    const bloodRequests = await BloodRequestServie.getBloodRequestById(
+      req.params.id
+    );
+    res.status(200).json({ message: "Success", data: bloodRequests });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const bloodRequest_routes = (router: Router) => {
-  router.get("/:id", getAllBloodReques);
+  router.get("/", getAllBloodReques);
+  router.get("/:id", getBloodRequestById);
   router.post("/", verifyToken, createBloodRequest);
 };
 

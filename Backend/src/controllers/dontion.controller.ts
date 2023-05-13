@@ -36,6 +36,7 @@ const getBloodDonations = async (
     res.status(500).send("Internal Server Error");
   }
 };
+
 const donation_routes = (router: Router) => {
   router.get("/", getBloodDonations);
   router.post("/", createBloodDonation);

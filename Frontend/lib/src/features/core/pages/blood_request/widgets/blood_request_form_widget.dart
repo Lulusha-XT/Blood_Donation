@@ -150,6 +150,7 @@ class BloodRequiestFormWidget extends ConsumerWidget {
 
                               if (success) {
                                 // Show success message
+                                ref.refresh(myRequestsProvider);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     backgroundColor: Colors.green,

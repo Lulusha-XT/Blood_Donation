@@ -8,6 +8,7 @@ const secret: Secret = process.env.TOKEN_SECRET as Secret;
 
 interface IRequest extends Request {
   user?: IUser;
+  file?: Express.Multer.File; // Adjust the type based on your file object structure
 }
 
 interface ITokenData {

@@ -15,7 +15,12 @@ class BloodRequestNotifier extends StateNotifier<BloodRequestState> {
   ) async {
     state = state.copyWith(isLoading: true);
     final result = await _apiService.createBloodeRequest(bloodRequest);
-    state = state.copyWith(isLoading: false);
+    final bloodRequests = await _apiService.getBloodRequest();
+
+    state = state.copyWith(
+      bloodRequests: bloodRequests,
+      isLoading: false, // Set isLoading back to false
+    );
     return result;
   }
 

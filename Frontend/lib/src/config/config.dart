@@ -7,7 +7,7 @@ class Config {
   static const String getUser = "api/user";
   static const String getUserById = "api/user/";
   static const String updateUserById = "api/user/update";
-  static const String imageURL = "http://10.0.2.2/8080/";
+  static const String imageURL = "http://10.0.2.2:8080/";
   static const String bloodRequest = "api/bloodRequest";
   static const String getBloodRequest = "api/bloodRequest/";
   static const String donateNow = "api/donate";

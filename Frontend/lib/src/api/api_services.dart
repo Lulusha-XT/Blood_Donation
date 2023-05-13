@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
+import 'dart:io';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/src/config/config.dart';
 import 'package:flutter_application_1/src/features/authentication/models/login_response_model.dart';
@@ -21,7 +20,7 @@ class ApiService {
     Map<String, String> requestHeader = {'Content-Type': 'application/json'};
 
     var url = Uri.http(Config.apiURL, Config.registerApi);
-    var response = await client.post(url,
+    var respons = await client.post(url,
         headers: requestHeader,
         body: jsonEncode({
           "fullName": fullName,
@@ -31,7 +30,8 @@ class ApiService {
           "bloodType": bloodType,
         }));
 
-    if (response.statusCode == 200) {
+    if (respons.statusCode == 200) {
+      await SharedService.setLoginDetail(loginResponseJson(respons.body));
       return true;
     } else {
       return false;
@@ -85,6 +85,33 @@ class ApiService {
     }
   }
 
+  Future<List<BloodRequest>?> getBloodRequest() async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeader = {
+      "Content-Type": "application/json",
+      'Authorization': 'Basic ${loginDetails!.data.token.toString()}',
+    };
+    print("hi");
+    var url = Uri.http(
+      Config.apiURL,
+      Config.bloodRequest,
+    );
+    print(url);
+
+    var response = await client.get(url, headers: requestHeader);
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+
+      print("Data: $data");
+
+      if (data["data"] != null) {
+        return bloodRequestFromJson(data["data"]);
+      }
+    }
+    return null;
+  }
+
   Future<List<MyRequest>?> getMyRequest() async {
     var loginDatails = await SharedService.loginDetails();
     Map<String, String> requestHeader = {
@@ -99,38 +126,12 @@ class ApiService {
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
-      return myRequestFromJson(data["data"]);
-    } else {
-      return null;
+      print("Data: $data");
+      if (data != null) {
+        return myRequestFromJson(data["data"]);
+      }
     }
-  }
-
-  Future<bool> updtaProfile(UserModel user) async {
-    var lodingDetail = await SharedService.loginDetails();
-    Map<String, String> requestHeaders = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Basic ${lodingDetail?.data.token.toString()}'
-    };
-    var url = Uri.http(Config.apiURL, Config.updateUserById);
-    var response = await client.put(
-      url,
-      headers: requestHeaders,
-      body: jsonEncode({
-        "fullName": user.fullName,
-        "email": user.email,
-        "phoneNo": user.phoneNo,
-        "bloodType": user.bloodType,
-      }),
-    );
-    if (response.statusCode == 200) {
-      return true;
-    } else if (response.statusCode == 401) {
-      navigatorKey.currentState
-          ?.pushNamedAndRemoveUntil("/login", (route) => false);
-      return false;
-    } else {
-      return false;
-    }
+    return null;
   }
 
   Future<bool> createBloodeRequest(BloodRequest bloodRequest) async {
@@ -151,31 +152,6 @@ class ApiService {
       return false;
     } else {
       return false;
-    }
-  }
-
-  Future<List<BloodRequest>?> getBloodRequest() async {
-    var loginDetails = await SharedService.loginDetails();
-    Map<String, String> requestHeader = {
-      "Content-Type": "application/json",
-      'Authorization': 'Basic ${loginDetails!.data.token.toString()}',
-    };
-
-    var url = Uri.http(
-      Config.apiURL,
-      "${Config.getBloodRequest}${loginDetails.data.userId.toString()}",
-    );
-
-    var response = await client.get(url, headers: requestHeader);
-
-    if (response.statusCode == 200) {
-      if (kDebugMode) {
-        print(response.body);
-      }
-      var data = jsonDecode(response.body);
-      return bloodRequestFromJson(data["data"]);
-    } else {
-      return null;
     }
   }
 
@@ -227,6 +203,48 @@ class ApiService {
           ?.pushNamedAndRemoveUntil("/login", (route) => false);
       return false;
     } else {
+      return false;
+    }
+  }
+
+  Future<bool> updateProfile(UserModel user, File imageFile) async {
+    try {
+      var loginDetails = await SharedService.loginDetails();
+      var token = loginDetails?.data.token.toString();
+
+      var request = http.MultipartRequest(
+        'PUT',
+        Uri.http(Config.apiURL, Config.updateUserById),
+      );
+
+      // Set request headers
+      request.headers['Authorization'] = 'Basic $token';
+      // Set request fields
+      request.fields['fullName'] = user.fullName;
+      request.fields['email'] = user.email;
+      request.fields['phoneNo'] = user.phoneNo;
+      request.fields['bloodType'] = user.bloodType;
+
+      // Set profile picture
+      var profilePicField = await http.MultipartFile.fromPath(
+        'profilePicture',
+        imageFile.path,
+      );
+      request.files.add(profilePicField);
+
+      var streamedResponse = await request.send();
+
+      if (streamedResponse.statusCode == 200) {
+        return true;
+      } else if (streamedResponse.statusCode == 401) {
+        navigatorKey.currentState
+            ?.pushNamedAndRemoveUntil("/login", (route) => false);
+        return false;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print('Error updating profile: $e');
       return false;
     }
   }

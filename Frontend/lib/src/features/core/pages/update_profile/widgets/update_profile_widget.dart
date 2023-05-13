@@ -5,7 +5,6 @@ import 'package:flutter_application_1/src/constants/text_string.dart';
 import 'package:flutter_application_1/src/features/core/controllers/update_profile_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-
 import '../../../../../config/config.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../providers/providers.dart';
@@ -69,30 +68,6 @@ class UpdateProfileWidget extends ConsumerWidget {
           ),
           const SizedBox(height: cFormHeigth - 20),
           Obx(
-            () => TextFormField(
-              controller: controllers.password,
-              decoration: InputDecoration(
-                label: const Text(cPassword),
-                prefixIcon: const Icon(Icons.key_outlined),
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    controllers.hidePassword.value =
-                        !controllers.hidePassword.value;
-                  },
-                  color: Colors.redAccent.withOpacity(.4),
-                  icon: Icon(
-                    controllers.hidePassword.value
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                ),
-              ),
-              validator: (value) => validate(value, cPassword),
-              obscureText: controllers.hidePassword.value,
-            ),
-          ),
-          const SizedBox(height: cFormHeigth - 10),
-          Obx(
             () => controllers.isAsyncCallProcess.value
                 ? const Center(
                     child: DottedCircularProgressIndicatorFb(
@@ -108,9 +83,9 @@ class UpdateProfileWidget extends ConsumerWidget {
                         if (formKey.currentState!.validate()) {
                           // Show circular progress indicator while creating user
                           controllers.isAsyncCallProcess.value = true;
+
                           final user = UserModel(
                             email: controllers.email.text.trim(),
-                            password: controllers.password.text.trim(),
                             fullName: controllers.fullname.text.trim(),
                             phoneNo: controllers.phoneNo.text.trim(),
                             bloodType: controllers.bloodType.text.trim(),
@@ -121,11 +96,11 @@ class UpdateProfileWidget extends ConsumerWidget {
                           try {
                             await ref
                                     .read(userProvider.notifier)
-                                    .updateUserInfo(user)
+                                    .updateUserInfo(
+                                        user, controllers.imageFile.value!)
                                 ?
 
                                 // If the registration was successful
-
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context) {

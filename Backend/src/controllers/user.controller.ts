@@ -1,9 +1,10 @@
-import { Request, Response, Router } from "express";
+import { Request, Response, Router, NextFunction } from "express";
 import { IUser, User } from "../models/user.model";
 import * as userServices from "../services/users.service";
 import { Pagination } from "../types/pagination.types";
 import { verifyToken } from "../middlewares/auth";
 import { IRequest } from "../interface/user.interface";
+import uploadProfilePicture from "../middlewares/user.upload";
 
 const createUser = async (req: Request, res: Response, next: Function) => {
   try {
@@ -80,17 +81,19 @@ const deleteUser = async (req: Request, res: Response, next: Function) => {
 const updatedUserById = async (
   req: IRequest,
   res: Response,
-  next: Function
+  next: NextFunction
 ) => {
   try {
-    console.log(req.body.email);
-    const id = req.user!.userId;
+    const profile_picture_path = req.file?.path?.replace(/\\/g, "/") || "";
+    console.log(`Profile ${profile_picture_path}`);
+    const id = req.user?.userId;
     const user: IUser = {
       fullName: req.body.fullName,
       email: req.body.email,
       password: req.body.password,
       phoneNo: req.body.phoneNo,
       bloodType: req.body.bloodType,
+      profilePicture: profile_picture_path,
     };
 
     const updatedUser = await userServices.updateUserById(
@@ -102,12 +105,18 @@ const updatedUserById = async (
     return next(error);
   }
 };
+
 const user_routes = (router: Router) => {
   router.get("/", getAllUser);
   router.get("/:id", getUserById);
   router.post("/register", createUser);
   router.post("/login", userLogin);
-  router.put("/update", verifyToken, updatedUserById);
+  router.put(
+    "/update",
+    verifyToken,
+    uploadProfilePicture.single("profilePicture"),
+    updatedUserById
+  );
   router.delete("/:id", deleteUser);
 };
 

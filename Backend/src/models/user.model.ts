@@ -26,6 +26,7 @@ const userSchema = new Schema<IUserDocument>(
     dateOfBirth: { type: String },
     medicalCondition: { type: String },
     token: { type: String },
+    profilePicture: { type: String },
   },
   {
     timestamps: true,

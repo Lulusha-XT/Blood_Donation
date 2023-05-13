@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/features/core/pages/profile/widget/profile_widget.dart';
 import 'package:flutter_application_1/src/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,29 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Icon(color: cPrimaryColor, Icons.arrow_back_ios_new),
+          ),
+        ),
+        title: Text(
+          "Profile",
+          style: const TextStyle(
+            fontSize: 16,
+            color: cPrimaryColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [],
+      ),
       backgroundColor: Colors.red,
       body: _userData(context),
     );

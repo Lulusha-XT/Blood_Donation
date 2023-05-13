@@ -18,7 +18,7 @@ interface IBloodRequestDocument extends IBloodRequest, Document {
 const bloodRequestSchema = new Schema<IBloodRequestDocument>(
   {
     bloodType: { type: String, required: true },
-    reason: { type: String, required: true, unique: true },
+    reason: { type: String, required: true },
     unitRequired: { type: Number, required: true },
     deadLine: { type: String, required: true },
     hospital: { type: String, required: true },

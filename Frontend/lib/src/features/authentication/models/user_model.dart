@@ -1,3 +1,5 @@
+import 'package:flutter_application_1/src/config/config.dart';
+
 class UserModel {
   String? id;
   String fullName;
@@ -48,4 +50,9 @@ class UserModel {
       "dateOfBirth": dateOfBirth,
     };
   }
+}
+
+extension UserModelExt on UserModel {
+  String get fullImagePath =>
+      profilePicture != null ? Config.imageURL + profilePicture! : '';
 }
