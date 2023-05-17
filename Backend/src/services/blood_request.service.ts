@@ -4,6 +4,7 @@ import {
   IBloodRequest,
   IBloodRequestDocument,
 } from "../models/blood_request.model";
+import { IUserDoner } from "../models/donation.model";
 import { Pagination } from "../types/pagination.types";
 
 export const createBloodRequest = async (
@@ -20,27 +21,77 @@ export const createBloodRequest = async (
   }
 };
 
-export const getAllBloodRequest = async (
+export async function getAllBloodRequests(
   pagination: Pagination
-): Promise<IBloodRequestDocument[]> => {
+): Promise<IBloodRequestDocument[]> {
   try {
     const perPage =
       Math.abs(parseInt(pagination.pageSize!)) || MONGO_DB_CONFIG.PAGE_SIZE;
     const page = (Math.abs(parseInt(pagination.page!)) || 1) - 1;
 
-    const user = await BloodRequest.find()
+    const bloodRequests = await BloodRequest.find()
+      .select(
+        "bloodType reason unitRequired deadLine hospital personInCharge contactNumber patientName location requesterId userDoners pendingState completedState createdAt updatedAt"
+      )
+      .populate("userDoners")
       .limit(perPage)
       .skip(page * perPage);
-    return user as IBloodRequestDocument[];
+
+    // Calculate pendingState and completedState for each blood request
+    const bloodRequestsWithStats = bloodRequests.map((bloodRequest) => {
+      const pendingState = bloodRequest.userDoners.filter(
+        (userDoner: IUserDoner) => userDoner.status === "Pending"
+      ).length;
+
+      const completedState = bloodRequest.userDoners.filter(
+        (userDoner: IUserDoner) => userDoner.status === "Completed"
+      ).length;
+
+      return {
+        ...bloodRequest.toJSON(),
+        pendingState,
+        completedState,
+      };
+    });
+
+    return bloodRequestsWithStats as IBloodRequestDocument[];
   } catch (error) {
-    throw new Error(`Request not found ${error}`);
+    console.error("Error fetching blood requests:", error);
+    return [];
   }
-};
-export const getBloodRequestById = async (userId: string) => {
+}
+
+export async function getBloodRequestsByRequesterId(
+  requesterId: string
+): Promise<IBloodRequestDocument[]> {
   try {
-    const user = await BloodRequest.find({ userId: userId });
-    return user as unknown as IBloodRequestDocument[];
+    console.log(`Requester ${requesterId}`);
+    const bloodRequests = await BloodRequest.find({ requesterId })
+      .select(
+        "bloodType reason unitRequired deadLine hospital personInCharge contactNumber patientName location requesterId userDoners pendingState completedState createdAt updatedAt"
+      )
+      .populate("userDoners");
+
+    // Calculate pendingState and completedState for each blood request
+    const bloodRequestsWithStats = bloodRequests.map((bloodRequest) => {
+      const pendingState = bloodRequest.userDoners.filter(
+        (userDoner: IUserDoner) => userDoner.status === "Pending"
+      ).length;
+
+      const completedState = bloodRequest.userDoners.filter(
+        (userDoner: IUserDoner) => userDoner.status === "Completed"
+      ).length;
+
+      return {
+        ...bloodRequest.toJSON(),
+        pendingState,
+        completedState,
+      };
+    });
+
+    return bloodRequestsWithStats as IBloodRequestDocument[];
   } catch (error) {
-    throw new Error(`Request not found ${error}`);
+    console.error("Error fetching blood requests:", error);
+    return [];
   }
-};
+}

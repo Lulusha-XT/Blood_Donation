@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/src/config/config.dart';
 import 'package:flutter_application_1/src/features/authentication/models/login_response_model.dart';
-import 'package:flutter_application_1/src/features/authentication/models/user_model.dart';
+import 'package:flutter_application_1/src/features/core/models/user_model.dart';
 import 'package:flutter_application_1/src/features/core/models/blood_request_model.dart';
-import 'package:flutter_application_1/src/features/core/models/my_request_model.dart';
+import 'package:flutter_application_1/src/features/core/models/user_doner.dart';
 import 'package:flutter_application_1/src/utils/shared_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -59,7 +59,7 @@ class ApiService {
     }
   }
 
-  Future<UserModel?> getUsersData() async {
+  Future<User?> getUsersData() async {
     var loginDetails = await SharedService.loginDetails();
     Map<String, String> requestHeader = {
       "Content-Type": "application/json",
@@ -77,11 +77,41 @@ class ApiService {
       print(response.body);
       var data = jsonDecode(response.body);
 
-      UserModel user = UserModel.fromJson(data["data"]);
+      User user = User.fromJson(data["data"]);
 
       return user;
     } else {
       return null;
+    }
+  }
+
+  Future<bool> approvedUserDoners(String donationId, String doner) async {
+    var lodingDetail = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ${lodingDetail?.data.token.toString()}'
+    };
+    var url = Uri.http(Config.apiURL, Config.approvedDonation);
+    print(url);
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode({
+        "donationId": donationId,
+        "doner": doner,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      print("true");
+      return true;
+    } else if (response.statusCode == 401) {
+      navigatorKey.currentState
+          ?.pushNamedAndRemoveUntil("/login", (route) => false);
+      return false;
+    } else {
+      print(response.body);
+      return false;
     }
   }
 
@@ -112,7 +142,7 @@ class ApiService {
     return null;
   }
 
-  Future<List<MyRequest>?> getMyRequest() async {
+  Future<List<BloodRequest>?> getMyRequest() async {
     var loginDatails = await SharedService.loginDetails();
     Map<String, String> requestHeader = {
       "Content-Type": "application/json",
@@ -121,14 +151,14 @@ class ApiService {
 
     var url = Uri.http(Config.apiURL,
         "${Config.getBloodRequest}${loginDatails.data.userId.toString()}");
-
+    print(url);
     var response = await client.get(url, headers: requestHeader);
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       print("Data: $data");
       if (data != null) {
-        return myRequestFromJson(data["data"]);
+        return bloodRequestFromJson(data["data"]);
       }
     }
     return null;
@@ -178,23 +208,23 @@ class ApiService {
     }
   }
 
-  Future<bool> donateNow(String requesterId, String bloodRequestId) async {
+  Future<bool> donateNow(String bloodRequestId) async {
     var lodingDetail = await SharedService.loginDetails();
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
       'Authorization': 'Basic ${lodingDetail?.data.token.toString()}'
     };
-    var url = Uri.http(Config.apiURL, Config.donateNow);
+    var url = Uri.http(Config.apiURL, Config.donation);
 
     var response = await client.post(
       url,
       headers: requestHeaders,
       body: jsonEncode({
-        "acceptor": requesterId,
-        "requestId": bloodRequestId,
+        "request": bloodRequestId,
         "donor": lodingDetail?.data.userId,
       }),
     );
+
     if (response.statusCode == 200) {
       print("true");
       return true;
@@ -207,7 +237,29 @@ class ApiService {
     }
   }
 
-  Future<bool> updateProfile(UserModel user, File imageFile) async {
+  Future<List<UserDoner>?> getDonatingUsers(String requestId) async {
+    var loginDatails = await SharedService.loginDetails();
+    Map<String, String> requestHeader = {
+      "Content-Type": "application/json",
+      'Authorization': 'Basic ${loginDatails!.data.token.toString()}',
+    };
+
+    var url = Uri.http(Config.apiURL, "${Config.getDoners}$requestId");
+
+    var response = await client.get(url, headers: requestHeader);
+    print(url);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      print("Data: $data");
+      if (data != null) {
+        print(data["data"]);
+        return userDonerFromJson(data["data"]);
+      }
+    }
+    return null;
+  }
+
+  Future<bool> updateProfile(User user, File imageFile) async {
     try {
       var loginDetails = await SharedService.loginDetails();
       var token = loginDetails?.data.token.toString();

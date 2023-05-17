@@ -1,43 +1,89 @@
-class UserModel {
-  late final String? id;
-  late final String fullName;
-  late final String email;
-  late final String phoneNo;
-  final String password;
-  late final String bloodType;
-  late final String? profilePicture;
+import 'package:flutter_application_1/src/config/config.dart';
 
-  UserModel({
-    this.id,
-    required this.email,
-    required this.password,
-    required this.bloodType,
+class User {
+  String fullName;
+  String email;
+  String? password;
+  String bloodType;
+  String phoneNo;
+  String? dateOfBirth;
+  String? medicalCondition;
+  String? profilePicture;
+  List<TokenValue>? tokensValue;
+  String? userId;
+
+  User({
     required this.fullName,
+    required this.email,
+    this.password,
+    required this.bloodType,
     required this.phoneNo,
+    this.dateOfBirth,
+    this.medicalCondition,
     this.profilePicture,
+    this.tokensValue,
+    this.userId,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      id: json["userId"],
-      email: json["email"],
-      fullName: json["fullName"],
-      phoneNo: json["phoneNo"],
-      password: json["password"],
-      bloodType: json["bloodType"],
-      profilePicture: json["profilePicture"],
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      fullName: json['fullName'],
+      email: json['email'],
+      password: json['password'],
+      bloodType: json['bloodType'],
+      phoneNo: json['phoneNo'],
+      dateOfBirth: json['dateOfBirth'],
+      medicalCondition: json['medicalCondition'],
+      profilePicture: json['profilePicture'],
+      tokensValue: (json['tokensValue'] as List<dynamic>?)
+          ?.map((tokenValue) => TokenValue.fromJson(tokenValue))
+          .toList(),
+      userId: json['userId'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "userId": id,
-      "email": email,
-      "fullName": fullName,
-      "phoneNo": phoneNo,
-      "password": password,
-      "bloodType": bloodType,
-      "profilePicture": profilePicture,
+      'fullName': fullName,
+      'email': email,
+      'password': password,
+      'bloodType': bloodType,
+      'phoneNo': phoneNo,
+      'dateOfBirth': dateOfBirth,
+      'medicalCondition': medicalCondition,
+      'profilePicture': profilePicture,
+      'tokensValue':
+          tokensValue?.map((tokenValue) => tokenValue.toJson()).toList(),
+      'userId': userId,
+    };
+  }
+}
+
+extension UserModelExt on User {
+  String get fullImagePath =>
+      profilePicture != null ? Config.imageURL + profilePicture! : '';
+}
+
+class TokenValue {
+  String? value;
+  bool used;
+
+  TokenValue({
+    this.value,
+    this.used = false,
+  });
+
+  factory TokenValue.fromJson(Map<String, dynamic> json) {
+    return TokenValue(
+      value: json['value'],
+      used: json['used'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'value': value,
+      'used': used,
     };
   }
 }

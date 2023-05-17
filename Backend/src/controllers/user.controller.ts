@@ -58,6 +58,7 @@ const userLogin = async (req: Request, res: Response, next: Function) => {
     const token = await userServices.logIn(email, password);
 
     if (token) {
+      console.log(token);
       res.json({ message: "Success", data: token });
     } else {
       res
@@ -106,8 +107,36 @@ const updatedUserById = async (
   }
 };
 
+const getUserByToken = async (req: Request, res: Response, next: Function) => {
+  try {
+    const tokenValue = req.body.tokenValue;
+    console.log(`TokenValue ${tokenValue}`);
+    const userWithId = await userServices.getUserByToken(tokenValue);
+    return res.json({ message: "Success", data: userWithId });
+  } catch (error) {
+    return next(error);
+  }
+};
+const useAndRomeveToken = async (
+  req: Request,
+  res: Response,
+  next: Function
+) => {
+  try {
+    const tokenValue = req.body.tokenValue;
+    const userId = req.body.userId;
+    console.log(`TokenValue ${tokenValue}`);
+    const userWithId = await userServices.useAndRomeveToken(userId, tokenValue);
+    return res.json({ message: "Success", data: userWithId });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 const user_routes = (router: Router) => {
   router.get("/", getAllUser);
+  router.get("/token", getUserByToken);
+  router.post("/token/use", useAndRomeveToken);
   router.get("/:id", getUserById);
   router.post("/register", createUser);
   router.post("/login", userLogin);

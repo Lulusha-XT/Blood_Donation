@@ -4,7 +4,7 @@ import 'package:flutter_application_1/src/common_widgets/circularProgressBar/cir
 import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
-import 'package:flutter_application_1/src/features/authentication/controllers/blood_request_controller.dart';
+import 'package:flutter_application_1/src/features/core/controllers/blood_request_controller.dart';
 import 'package:flutter_application_1/src/features/core/models/blood_request_model.dart';
 import 'package:flutter_application_1/src/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +17,9 @@ class BloodRequiestFormWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controllers = Get.put(BloodRequestControllers());
     final formKey = GlobalKey<FormState>();
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    // Obtain ScaffoldMessenger outside the asynchronous function
+
     return Form(
       key: formKey,
       child: Column(
@@ -107,6 +110,17 @@ class BloodRequiestFormWidget extends ConsumerWidget {
             ),
             validator: (value) => validate(value, cPatientName),
           ),
+          const SizedBox(height: cFormHeigth - 20),
+          TextFormField(
+            controller: controllers.location,
+            decoration: const InputDecoration(
+              label: Text(cLocation),
+              prefixIcon: Icon(
+                Icons.location_on,
+              ), // Change the icon to location
+            ),
+            validator: (value) => validate(value, cPatientName),
+          ),
 
           const SizedBox(height: cFormHeigth - 10),
 
@@ -143,6 +157,7 @@ class BloodRequiestFormWidget extends ConsumerWidget {
                               contactNumber:
                                   controllers.contactNumber.text.trim(),
                               patientName: controllers.patientName.text.trim(),
+                              location: controllers.location.text.trim(),
                             );
                             try {
                               final success = await notifier
@@ -150,17 +165,18 @@ class BloodRequiestFormWidget extends ConsumerWidget {
 
                               if (success) {
                                 // Show success message
-                                ref.refresh(myRequestsProvider);
-                                ScaffoldMessenger.of(context).showSnackBar(
+                                ref.invalidate(myRequestsProvider);
+                                scaffoldMessenger.showSnackBar(
                                   const SnackBar(
                                     backgroundColor: Colors.green,
                                     content: Text(
-                                        "Blood request created successfully"),
+                                      "Blood request created successfully",
+                                    ),
                                   ),
                                 );
                               } else {
                                 // Show error message
-                                ScaffoldMessenger.of(context).showSnackBar(
+                                scaffoldMessenger.showSnackBar(
                                   const SnackBar(
                                     backgroundColor: Colors.red,
                                     content:

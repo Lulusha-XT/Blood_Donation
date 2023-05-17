@@ -3,12 +3,12 @@ import 'package:flutter_application_1/src/common_widgets/circularProgressBar/cir
 import 'package:flutter_application_1/src/constants/sizes.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
 import 'package:flutter_application_1/src/features/core/controllers/update_profile_controller.dart';
+import 'package:flutter_application_1/src/features/core/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import '../../../../../config/config.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../providers/providers.dart';
-import '../../../../authentication/models/user_model.dart';
 import '../../dashboard_page/home_page.dart';
 
 class UpdateProfileWidget extends ConsumerWidget {
@@ -84,7 +84,7 @@ class UpdateProfileWidget extends ConsumerWidget {
                           // Show circular progress indicator while creating user
                           controllers.isAsyncCallProcess.value = true;
 
-                          final user = UserModel(
+                          final user = User(
                             email: controllers.email.text.trim(),
                             fullName: controllers.fullname.text.trim(),
                             phoneNo: controllers.phoneNo.text.trim(),

@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter_application_1/src/api/api_services.dart';
-import 'package:flutter_application_1/src/features/authentication/models/user_model.dart';
+import 'package:flutter_application_1/src/features/core/models/user_model.dart';
 import 'package:flutter_application_1/src/features/core/controllers/update_profile_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
-class UserNotifier extends StateNotifier<UserModel> {
+class UserNotifier extends StateNotifier<User> {
   UserNotifier(this._apiService)
-      : super(UserModel(bloodType: '', email: '', fullName: '', phoneNo: ''));
+      : super(User(bloodType: '', email: '', fullName: '', phoneNo: ''));
   final ApiService _apiService;
   final controllers = Get.put(UpdateProfileController());
   Future<void> getUser() async {
@@ -18,7 +18,7 @@ class UserNotifier extends StateNotifier<UserModel> {
     print("user $user");
   }
 
-  Future<bool> updateUserInfo(UserModel user, File imageFile) async {
+  Future<bool> updateUserInfo(User user, File imageFile) async {
     final updatedUser = await _apiService.updateProfile(user, imageFile);
     if (updatedUser) {
       final user = await _apiService.getUsersData();

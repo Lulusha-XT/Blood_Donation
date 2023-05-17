@@ -37,7 +37,6 @@ export const createUser = async (user: IUser): Promise<IUserDocument> => {
   }
 };
 
-// Log in
 export const logIn = async (email: string, password: string) => {
   try {
     const user = await User.findOne({ email });
@@ -48,12 +47,16 @@ export const logIn = async (email: string, password: string) => {
     ) {
       const token = auth.assignAccessToken(user);
       console.log(token);
+
+      // Update user token and save
       user.token = token;
+      await user.save();
+
       return user as IUserDocument;
     }
     return null;
   } catch (error) {
-    throw new Error(`Log in faild ${error}`);
+    throw new Error(`Log in failed ${error}`);
   }
 };
 
@@ -110,3 +113,46 @@ export const deleteUser = async (id: string) => {
     throw new Error(`Delete failed ${error}`);
   }
 };
+
+export async function useAndRomeveToken(
+  userId: string,
+  tokenValue: string
+): Promise<void | string> {
+  try {
+    // Find the user document
+    const user = await User.findById(userId);
+    if (!user) {
+      return "User not found";
+    }
+    if (!user.tokensValue) {
+      user.tokensValue = [];
+    }
+    // Filter out the token from the user's tokens array
+    user.tokensValue = user.tokensValue.filter(
+      (token) => token.value.toString() !== tokenValue
+    );
+    // Save the updated user document
+    await user.save();
+  } catch (error) {
+    return `${error}`; // Return the error message
+  }
+}
+
+// Function to find a user by token and count occurrences
+export async function getUserByToken(
+  token: string
+): Promise<{ user: IUserDocument | null; totalToken: number }> {
+  try {
+    console.log(token);
+    const user = await User.findOne({
+      "tokensValue.value": { $in: [token] },
+    }).exec();
+
+    const totalToken = user?.tokensValue!.length ?? 0;
+
+    return { user, totalToken };
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to find user by token");
+  }
+}

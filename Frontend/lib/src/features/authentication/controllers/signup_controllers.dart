@@ -21,13 +21,13 @@ class SignUpControllers extends GetxController {
     // AuthenticationRepository.instance .createUserWithEmailAndPassword(email, password);
   }
 
-  Future<bool> createUser(UserModel user) async {
+  Future<bool> createUser(User user) async {
     bool result = await ApiService.registerUser(
       user.fullName,
       user.bloodType,
       user.email,
       user.phoneNo,
-      user.password,
+      user.password!,
     );
     isAsyncCallProcess.value = false;
     return result;

@@ -1,4 +1,5 @@
-import mongoose, { Model, Schema, Document } from "mongoose";
+import mongoose, { Model, Schema, Document, Types } from "mongoose";
+import { IUserDoner } from "./donation.model";
 
 interface IBloodRequest {
   bloodType: string;
@@ -9,10 +10,15 @@ interface IBloodRequest {
   personInCharge: string;
   contactNumber: string;
   patientName: string;
-  userId: string;
+  location: string;
+  requesterId?: string | Types.ObjectId;
+  pendingState?: number;
+  completedState?: number;
 }
+
 interface IBloodRequestDocument extends IBloodRequest, Document {
   requestId: string;
+  userDoners: IUserDoner[];
 }
 
 const bloodRequestSchema = new Schema<IBloodRequestDocument>(
@@ -25,7 +31,11 @@ const bloodRequestSchema = new Schema<IBloodRequestDocument>(
     personInCharge: { type: String },
     contactNumber: { type: String },
     patientName: { type: String },
-    userId: { type: String },
+    location: { type: String },
+    requesterId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    userDoners: [{ type: Types.ObjectId, ref: "UserDoner" }],
+    pendingState: { type: Number, default: 0 },
+    completedState: { type: Number, default: 0 },
   },
   {
     timestamps: true,

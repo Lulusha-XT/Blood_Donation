@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/common_widgets/profile_avater/profile_avater.dart';
 import 'package:flutter_application_1/src/constants/image_strings.dart';
-import 'package:flutter_application_1/src/features/authentication/models/user_model.dart';
+import 'package:flutter_application_1/src/features/core/models/user_model.dart';
 import 'package:flutter_application_1/src/features/core/controllers/update_profile_controller.dart';
 import 'package:flutter_application_1/src/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

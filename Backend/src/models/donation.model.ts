@@ -1,32 +1,28 @@
-import { Schema, Document, Types, model } from "mongoose";
-import { IBloodRequest } from "./blood_request.model";
+import mongoose, { Schema, Document, model } from "mongoose";
 import { IUser } from "./user.model";
 
-interface IBloodDonation {
+interface IUserDoner {
+  request: mongoose.Types.ObjectId;
   donor: IUser;
-  acceptor: IUser;
-  requestId: IBloodRequest;
+  status?: "Open" | "Pending" | "Completed";
 }
 
-interface IBloodDonationDocumnet extends IBloodDonation, Document {
+interface IUserDonerDocumnet extends IUserDoner, Document {
   donationId: string;
 }
-const bloodDonationSchema = new Schema<IBloodDonationDocumnet>(
+const bloodDonationSchema = new Schema<IUserDonerDocumnet>(
   {
+    request: { type: Schema.Types.ObjectId, ref: "BloodRequest" },
     donor: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    acceptor: {
-      type: Types.ObjectId,
-      ref: "User",
+    status: {
+      type: String,
+      enum: ["Pending", "Completed"],
       required: true,
-    },
-    requestId: {
-      type: Schema.Types.ObjectId,
-      ref: "BloodRequest",
-      required: true,
+      default: "Pending",
     },
   },
   {
@@ -41,9 +37,9 @@ const bloodDonationSchema = new Schema<IBloodDonationDocumnet>(
   }
 );
 
-const BloodDonationModel = model<IBloodDonation>(
-  "BloodDonation",
+const UserDonerModel = model<IUserDonerDocumnet>(
+  "UserDoner",
   bloodDonationSchema
 );
 
-export { IBloodDonation, BloodDonationModel };
+export { IUserDoner, UserDonerModel };

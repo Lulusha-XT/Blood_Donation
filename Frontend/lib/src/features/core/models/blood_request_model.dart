@@ -2,7 +2,6 @@ List<BloodRequest> bloodRequestFromJson(dynamic str) =>
     List<BloodRequest>.from((str).map((x) => BloodRequest.fromJson(x)));
 
 class BloodRequest {
-  String? requestId;
   String bloodType;
   String reason;
   double unitRequired;
@@ -11,9 +10,13 @@ class BloodRequest {
   String? personInCharge;
   String contactNumber;
   String patientName;
-  String? userId;
+  String location;
+  String? requestId;
+  List<String>? userDoners;
+  int? pendingState;
+  int? completedState;
+
   BloodRequest({
-    this.requestId,
     required this.bloodType,
     required this.reason,
     required this.unitRequired,
@@ -22,35 +25,45 @@ class BloodRequest {
     this.personInCharge,
     required this.contactNumber,
     required this.patientName,
-    this.userId,
+    required this.location,
+    this.requestId,
+    this.userDoners,
+    this.pendingState,
+    this.completedState,
   });
 
   factory BloodRequest.fromJson(Map<String, dynamic> json) {
     return BloodRequest(
-      requestId: json["requestId"],
-      bloodType: json["bloodType"],
-      reason: json["reason"],
-      unitRequired: json["unitRequired"],
-      deadLine: json["deadLine"],
-      hospital: json["hospital"],
-      personInCharge: json["personInCharge"],
-      contactNumber: json["contactNumber"],
-      patientName: json["patientName"],
-      userId: json["userId"],
+      requestId: json['requestId'],
+      bloodType: json['bloodType'],
+      reason: json['reason'],
+      unitRequired: json['unitRequired'],
+      deadLine: json['deadLine'],
+      hospital: json['hospital'],
+      personInCharge: json['personInCharge'],
+      contactNumber: json['contactNumber'],
+      patientName: json['patientName'],
+      location: json['location'],
+      userDoners: json['userDoners'] != null
+          ? List<String>.from(json['userDoners'].map((x) => x.toString()))
+          : null,
+      pendingState: json['pendingState'],
+      completedState: json['completedState'],
     );
   }
+
   Map<String, dynamic> toJson() {
     return {
-      "requestId": requestId,
-      "bloodType": bloodType,
-      "reason": reason,
-      "unitRequired": unitRequired,
-      "deadLine": deadLine,
-      "hospital": hospital,
-      "personInCharge": personInCharge,
-      "contactNumber": contactNumber,
-      "patientName": patientName,
-      "userId": userId,
+      'bloodType': bloodType,
+      'reason': reason,
+      'unitRequired': unitRequired,
+      'deadLine': deadLine,
+      'hospital': hospital,
+      'personInCharge': personInCharge,
+      'contactNumber': contactNumber,
+      'patientName': patientName,
+      'location': location,
+      'requestId': requestId,
     };
   }
 }

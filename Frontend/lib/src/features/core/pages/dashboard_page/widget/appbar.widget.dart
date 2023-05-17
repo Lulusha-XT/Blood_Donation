@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/common_widgets/profile_avater/profile_avater.dart';
 import 'package:flutter_application_1/src/constants/image_strings.dart';
-import 'package:flutter_application_1/src/features/authentication/models/user_model.dart';
+import 'package:flutter_application_1/src/features/core/models/user_model.dart';
 import 'package:flutter_application_1/src/features/core/pages/profile/profile_page.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +10,7 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.user,
   });
-  final UserModel user;
+  final User user;
   @override
   Widget build(BuildContext context) {
     return AppBar(

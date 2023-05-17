@@ -1,4 +1,5 @@
 import { Request, Response, Router } from "express";
+import mongoose from "mongoose";
 import { IBloodRequest } from "../models/blood_request.model";
 import * as BloodRequestServie from "../services/blood_request.service";
 import { Pagination } from "../types/pagination.types";
@@ -20,9 +21,10 @@ const createBloodRequest = async (
       personInCharge: req.body.personInCharge,
       contactNumber: req.body.contactNumber,
       patientName: req.body.patientName,
-      userId: req.user!.userId,
+      location: req.body.location,
+      requesterId: req.user?.userId,
     };
-
+    console.log(`User Id ${new mongoose.Types.ObjectId(req.user?.id)}`);
     const newBloodRequest = await BloodRequestServie.createBloodRequest(
       bloodRequest
     );
@@ -42,7 +44,7 @@ const getAllBloodReques = async (
       pageSize: req.query.pageSize?.toString(),
     };
 
-    const allBloodRequest = await BloodRequestServie.getAllBloodRequest(
+    const allBloodRequest = await BloodRequestServie.getAllBloodRequests(
       pagination
     );
     return res.json({ message: "Success", data: allBloodRequest });
@@ -57,9 +59,8 @@ const getBloodRequestById = async (
   next: Function
 ) => {
   try {
-    const bloodRequests = await BloodRequestServie.getBloodRequestById(
-      req.params.id
-    );
+    const bloodRequests =
+      await BloodRequestServie.getBloodRequestsByRequesterId(req.params.id);
     res.status(200).json({ message: "Success", data: bloodRequests });
   } catch (error) {
     next(error);

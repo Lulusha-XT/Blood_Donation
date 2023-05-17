@@ -3,7 +3,7 @@ import 'package:flutter_application_1/src/common_widgets/profile_avater/profile_
 import 'package:flutter_application_1/src/constants/colors.dart';
 import 'package:flutter_application_1/src/constants/image_strings.dart';
 import 'package:flutter_application_1/src/constants/text_string.dart';
-import 'package:flutter_application_1/src/features/authentication/models/user_model.dart';
+import 'package:flutter_application_1/src/features/core/models/user_model.dart';
 import 'package:flutter_application_1/src/utils/shared_service.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -14,7 +14,7 @@ class MyDrawer extends StatelessWidget {
       required this.user});
   final int selectedIndex;
   final Function(int) onItemTapped;
-  final UserModel user;
+  final User user;
   @override
   Widget build(BuildContext context) {
     return Drawer(

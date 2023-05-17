@@ -113,7 +113,7 @@ class SignUpFormWidget extends StatelessWidget {
                         if (formKey.currentState!.validate()) {
                           // Show circular progress indicator while creating user
                           controllers.isAsyncCallProcess.value = true;
-                          final user = UserModel(
+                          final user = User(
                             email: controllers.email.text.trim(),
                             password: controllers.password.text.trim(),
                             fullName: controllers.fullname.text.trim(),

@@ -42,7 +42,7 @@ class ProfilePage extends StatelessWidget {
     return Consumer(
       builder: (context, ref, _) {
         final user = ref.watch(userProvider);
-        if (user.id == null) {
+        if (user.userId == null) {
           // fetch user data
           ref.read(userProvider.notifier).getUser();
           return const Center(

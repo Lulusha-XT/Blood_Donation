@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/colors.dart';
-import 'package:flutter_application_1/src/features/core/models/my_request_model.dart';
+import 'package:flutter_application_1/src/features/core/models/blood_request_model.dart';
+import 'package:flutter_application_1/src/features/core/pages/my_request_page/donteing_user.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RequestCardWidget extends StatelessWidget {
   const RequestCardWidget({super.key, required this.myRequest});
-  final List<MyRequest> myRequest;
+  final List<BloodRequest> myRequest;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -16,18 +18,18 @@ class RequestCardWidget extends StatelessWidget {
   }
 }
 
-class RequestListWidget extends StatelessWidget {
+class RequestListWidget extends ConsumerWidget {
   const RequestListWidget({super.key, required this.myRequest});
-  final MyRequest myRequest;
+  final BloodRequest myRequest;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.all(8),
       child: Column(
         children: [
           SizedBox(
             width: 600,
-            height: 180,
+            height: 220,
             child: Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
@@ -85,61 +87,55 @@ class RequestListWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                // handle phone icon click
-                              },
-                              child: const Icon(Icons.phone),
-                            ),
-                            const SizedBox(height: 20),
-                            GestureDetector(
-                              onTap: () {
-                                // handle message icon click
-                              },
-                              child: const Icon(Icons.message),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.end,
-                  //   children: [
-                  //     Container(
-                  //       height: 30,
-                  //       width: 150,
-                  //       margin: const EdgeInsets.all(6.0),
-                  //       decoration: BoxDecoration(
-                  //         borderRadius: BorderRadius.circular(8.0),
-                  //       ),
-                  //       child: Material(
-                  //         color:
-                  //             cPrimaryColor, // set a different background color here
-                  //         borderRadius: BorderRadius.circular(8.0),
-                  //         child: InkWell(
-                  //           onTap: () async {
-                  //             final ApiService apiService = ApiService();
-                  //             await apiService.donateNow(bloodRequest.userId!,
-                  //                 bloodRequest.requestId!);
-                  //           },
-                  //           child: const Center(
-                  //             child: Text(
-                  //               'Donate Now',
-                  //               style: TextStyle(
-                  //                 color: Colors.white,
-                  //                 fontSize: 19,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
+                  SizedBox(
+                    child: Column(
+                      children: [
+                        Text('Completed: ${myRequest.completedState}'),
+                        Text('Pendding: ${myRequest.pendingState}'),
+                        const SizedBox(height: 10),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UserDetailsScreen(
+                                    requestId: myRequest.requestId!),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 70,
+                            decoration: BoxDecoration(
+                              color: cPrimaryColor,
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'View',
+                                style: TextStyle(
+                                  color: cWhiteColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

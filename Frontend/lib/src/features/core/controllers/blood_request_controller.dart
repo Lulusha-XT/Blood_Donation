@@ -12,6 +12,7 @@ class BloodRequestControllers extends GetxController {
   final personInCharge = TextEditingController();
   final contactNumber = TextEditingController();
   final patientName = TextEditingController();
+  final location = TextEditingController();
 
   RxBool hidePassword = true.obs;
   String defaultValue = 'A';

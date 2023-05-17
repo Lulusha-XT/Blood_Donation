@@ -124,8 +124,9 @@ class RequestListWidget extends StatelessWidget {
                           child: InkWell(
                             onTap: () async {
                               final ApiService apiService = ApiService();
-                              await apiService.donateNow(bloodRequest.userId!,
-                                  bloodRequest.requestId!);
+                              await apiService.donateNow(
+                                bloodRequest.requestId!,
+                              );
                             },
                             child: const Center(
                               child: Text(

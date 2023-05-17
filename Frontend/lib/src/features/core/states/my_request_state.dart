@@ -1,7 +1,7 @@
-import 'package:flutter_application_1/src/features/core/models/my_request_model.dart';
+import 'package:flutter_application_1/src/features/core/models/blood_request_model.dart';
 
 class MyRequestState {
-  List<MyRequest> myRequests;
+  List<BloodRequest> myRequests;
   final bool hasNext;
   final bool isLoading;
 
@@ -12,11 +12,11 @@ class MyRequestState {
 
   factory MyRequestState.initial() {
     return MyRequestState(
-        myRequests: <MyRequest>[], hasNext: true, isLoading: false);
+        myRequests: <BloodRequest>[], hasNext: true, isLoading: false);
   }
 
   MyRequestState copywith({
-    List<MyRequest>? myRequest,
+    List<BloodRequest>? myRequest,
     bool? hasNext,
     bool? isLoading,
   }) {

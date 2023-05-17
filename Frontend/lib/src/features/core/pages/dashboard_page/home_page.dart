@@ -40,7 +40,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider);
-    if (user.id == null) {
+    if (user.userId == null) {
       ref.watch(userProvider.notifier).getUser();
       return const Scaffold(
         body: Center(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/constants/sizes.dart';
-import 'package:flutter_application_1/src/features/authentication/models/user_model.dart';
+import 'package:flutter_application_1/src/features/core/models/user_model.dart';
 import 'package:flutter_application_1/src/features/core/pages/update_profile/widgets/profile_picture_widget.dart';
 import 'package:flutter_application_1/src/features/core/pages/update_profile/widgets/update_profile_widget.dart';
 
 class UpdateProfilePage extends StatelessWidget {
   const UpdateProfilePage({super.key, required this.user});
-  final UserModel user;
+  final User user;
 
   @override
   Widget build(BuildContext context) {

@@ -14,6 +14,7 @@ interface IUser {
 interface IUserDocument extends IUser, Document {
   userId: string;
   token: string;
+  tokensValue?: { value: string; used: boolean }[];
 }
 
 const userSchema = new Schema<IUserDocument>(
@@ -26,6 +27,12 @@ const userSchema = new Schema<IUserDocument>(
     dateOfBirth: { type: String },
     medicalCondition: { type: String },
     token: { type: String },
+    tokensValue: [
+      {
+        value: { type: String },
+        used: { type: Boolean, default: false },
+      },
+    ],
     profilePicture: { type: String },
   },
   {
