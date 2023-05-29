@@ -19,7 +19,7 @@ class ApiService {
       String email, String phoneNo, String password) async {
     Map<String, String> requestHeader = {'Content-Type': 'application/json'};
 
-    var url = Uri.http(Config.apiURL, Config.registerApi);
+    var url = Uri.https(Config.apiURL, Config.registerApi);
     var respons = await client.post(url,
         headers: requestHeader,
         body: jsonEncode({
@@ -41,7 +41,7 @@ class ApiService {
   static Future<bool> loginUser(String email, String password) async {
     Map<String, String> requestHeader = {'Content-Type': 'application/json'};
 
-    var url = Uri.http(
+    var url = Uri.https(
       Config.apiURL,
       Config.loginApi,
     );
@@ -91,7 +91,7 @@ class ApiService {
       'Content-Type': 'application/json',
       'Authorization': 'Basic ${lodingDetail?.data.token.toString()}'
     };
-    var url = Uri.http(Config.apiURL, Config.approvedDonation);
+    var url = Uri.https(Config.apiURL, Config.approvedDonation);
     print(url);
     var response = await client.post(
       url,
@@ -170,7 +170,7 @@ class ApiService {
       "Content-Type": "application/json",
       'Authorization': 'Basic ${loginDetails!.data.token.toString()}',
     };
-    var url = Uri.http(Config.apiURL, Config.getBloodRequest);
+    var url = Uri.https(Config.apiURL, Config.getBloodRequest);
     var response = await client.post(url,
         headers: requestHeader, body: jsonEncode(bloodRequest.toJson()));
 
@@ -191,7 +191,7 @@ class ApiService {
       'Content-Type': 'application/json',
       'Authorization': 'Basic ${lodingDetail?.data.token.toString()}'
     };
-    var url = Uri.http(Config.apiURL, Config.updateUserById);
+    var url = Uri.https(Config.apiURL, Config.updateUserById);
     var response = await client.put(
       url,
       headers: requestHeaders,
@@ -214,7 +214,7 @@ class ApiService {
       'Content-Type': 'application/json',
       'Authorization': 'Basic ${lodingDetail?.data.token.toString()}'
     };
-    var url = Uri.http(Config.apiURL, Config.donation);
+    var url = Uri.https(Config.apiURL, Config.donation);
 
     var response = await client.post(
       url,
@@ -266,7 +266,7 @@ class ApiService {
 
       var request = http.MultipartRequest(
         'PUT',
-        Uri.http(Config.apiURL, Config.updateUserById),
+        Uri.https(Config.apiURL, Config.updateUserById),
       );
 
       // Set request headers

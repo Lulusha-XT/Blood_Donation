@@ -7,7 +7,7 @@ class MyRequestsNotifier extends StateNotifier<MyRequestState> {
       : super(MyRequestState(myRequests: [], hasNext: true, isLoading: false));
   final ApiService _apiService;
 
-  int _page = 1;
+  int page = 1;
 
   Future<void> getMyRequests() async {
     if (state.isLoading || !state.hasNext) {
@@ -26,7 +26,7 @@ class MyRequestsNotifier extends StateNotifier<MyRequestState> {
 
     Future.delayed(const Duration(microseconds: 1500), () {
       state = state.copywith(myRequest: newRequest);
-      _page++;
+      page++;
       state = state.copywith(isLoading: false);
     });
   }

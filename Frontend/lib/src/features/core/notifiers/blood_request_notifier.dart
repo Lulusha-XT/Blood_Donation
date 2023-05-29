@@ -8,7 +8,7 @@ class BloodRequestNotifier extends StateNotifier<BloodRequestState> {
       : super(BloodRequestState(
             bloodRequests: [], hasNext: true, isLoading: false));
   final ApiService _apiService;
-  int _page = 1;
+  int page = 1;
 
   Future<bool> createBloodRequest(
     BloodRequest bloodRequest,
@@ -44,7 +44,7 @@ class BloodRequestNotifier extends StateNotifier<BloodRequestState> {
       const Duration(microseconds: 1500),
       () {
         state = state.copyWith(bloodRequests: newbloodRequest);
-        _page++;
+        page++;
       },
     );
     state = state.copyWith(isLoading: false);
